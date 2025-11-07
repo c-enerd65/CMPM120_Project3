@@ -4,15 +4,19 @@ export class Start extends Phaser.Scene {
     }
 
     preload() {
-        this.loadGameImages();
-        this.loadSpritesheets();
-        this.loadGameAudio();
+        //loads all of the assets in respective folders
+        this.loadGameImages(); //background, prompts, etcs.
+        this.loadSpritesheets(); // player & foe sheets
+        this.loadGameAudio(); //game audio
     }
 
     create() {
+        //change all
         this.background = this.add.sprite(640, 360, 'startScreen').setScale(3);
         this.promptPlay = this.add.sprite(640, 540, 'startPrompt');
         this.alien = this.add.sprite(640, 280, 'player').setScale(10);
+       
+        //allows any key press to move to next scene
         this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
             this.scene.start('LevelOne');
