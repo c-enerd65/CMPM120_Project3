@@ -1,4 +1,4 @@
-const PLAYER_STAMINA = 5;
+const PLAYER_STAMINA = 100;
 
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, name = 'player')
@@ -105,6 +105,13 @@ class Player extends Phaser.GameObjects.Sprite {
 
             if(this.keyIn.up.isDown) {
                 this.grabWall();
+            }
+            else {
+                this.keyIn.up.on('up', function() {
+                    if(this.stamina < PLAYER_STAMINA) {
+                        this.stamina += 1;
+                    }
+                }, this);
             }
         }
         else {
