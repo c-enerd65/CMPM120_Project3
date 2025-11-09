@@ -10,7 +10,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.scene = scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setCollideWorldBounds(true);
+        this.body.setCollideWorldBounds(false);
         this.body.setCircle(12);
 
         //Status variables [subject to change]

@@ -19,7 +19,7 @@ export class LevelOne extends Phaser.Scene{
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 0);
+        this.player = new Player(this, 0, 250);
 
         this.mapCollisions(tileset);
         this.levelCamera();
