@@ -93,12 +93,23 @@ class Player extends Phaser.GameObjects.Sprite {
             this.anims.play('idle');
         }
 
+        //may change input key after playtesting
         if(Phaser.Input.Keyboard.JustDown(this.SPACE)) {
-            this.shoot();
+            this.grabWall(delta);
         }
     }
 
-    shoot() {
+    /*
+        player grabs wall, stamina depletes
+        by 1 (?) every second 
+    */
+    grabWall(dt) {
+        if(this.stamina <= 0) {
+            return;
+        }
+        
+        this.stamina -= 1 * dt;
+        this.body.setVelocityY(0);
     }
     
 }

@@ -14,13 +14,28 @@ export class LevelOne extends Phaser.Scene{
         this.height = this.sys.game.config.height;
         this.center_h = this.height / 2;
 
-        //adds a defualt bg for testing
-        //will change
-        this.background = this.add.sprite(this.center_w, this.center_h, 'background').setScale(3);
-
+        //add tilemap
+        this.map = this.add.tilemap('tilemap_1');
+        var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
+        
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 720).setScale(2);
+        this.player = new Player(this, 0, 0);
 
+        this.mapCollisions(tileset);
+        this.levelCamera();
+    }
+
+    mapCollisions(tileset) {
+        var ground = this.map.createLayer("ground", tileset, 0, 0);
+        ground.setCollisionBetween(1, this.width);
+        this.physics.add.collider(ground, this.player);
+
+        var grab = this.map.createLayer("grab", tileset, 0, 0);
+        grab.setCollisionBetween(1, this.width);
+        this.physics.add.collider(grab, this.player);
+    }
+
+    levelCamera() {
         //playing around with the camera settings [subject to change]
         this.playerCam = this.cameras.main.setBounds(0, 0, this.width, this.height); //creates camera var
         this.playerCam.startFollow(this.player, true, 0.5, 0.5, -200, 120); //sets camera to follow player

@@ -8,6 +8,7 @@ export class Start extends Phaser.Scene {
         this.loadGameImages(); //background, prompts, etcs.
         this.loadSpritesheets(); // player & foe sheets
         this.loadGameAudio(); //game audio
+        this.loadMaps();
     }
 
     create() {
@@ -49,5 +50,10 @@ export class Start extends Phaser.Scene {
 
     loadGameAudio() {
         this.load.audio('laser', 'assets/sound/laserRetro_001.ogg');
+    }
+
+    loadMaps() {
+        this.load.image('monoTiles', 'assets/map/monochrome_tilemap_packed.png');
+        this.load.tilemapTiledJSON('tilemap_1', 'assets/map/map01.tmj');
     }
 }
