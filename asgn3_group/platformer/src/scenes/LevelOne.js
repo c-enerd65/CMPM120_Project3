@@ -45,4 +45,9 @@ export class LevelOne extends Phaser.Scene{
     update() {
         this.player.update();
     } 
+
+    testReset() {
+        this.scene.stop(this.scene);
+        this.scene.start('LevelOne');
+    }
 }

@@ -1,3 +1,5 @@
+const PLAYER_STAMINA = 5;
+
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, name = 'player')
     {
@@ -5,16 +7,16 @@ class Player extends Phaser.GameObjects.Sprite {
         
         //general init
         this.name = name;
+        this.scene = scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setCollideWorldBounds(true);
-        this.body.setAllowGravity(true);
         this.body.setCircle(12);
 
         //Status variables [subject to change]
         this.score = 0;
         this.totalLives = 3;
-        this.stamina = 100; 
+        this.stamina = PLAYER_STAMINA; 
         
         //player boost flag
         this.hasBoost = false;
@@ -57,17 +59,21 @@ class Player extends Phaser.GameObjects.Sprite {
         // player jumps when pressing up '^' key
         this.keyIn.up.on('down', function() {
             if(this.body.blocked.down) {
-                this.body.setVelocityY(-360);
+                this.body.setVelocityY(-280);
             }
         }, this);
 
         //space bar for something??????
         //from prev iteration could recycle for something lul
         this.SPACE = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.R = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
 
     update(time, delta)
     {
+        this.body.isStatic = false;
+        this.body.setAllowGravity(true);
+        
         //if player has boost
         //add tween and sound
         if(this.hasBoost)
@@ -92,10 +98,22 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
             this.anims.play('idle');
         }
+        
+        if(this.body.blocked.right || this.body.blocked.left ? true : false) {
+            this.body.isStatic = true;
+            this.body.setAllowGravity(false);
 
-        //may change input key after playtesting
-        if(Phaser.Input.Keyboard.JustDown(this.SPACE)) {
-            this.grabWall(delta);
+            if(this.keyIn.up.isDown) {
+                this.grabWall();
+            }
+        }
+        else {
+            this.body.isStatic = false;
+            this.body.setAllowGravity(true);
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(this.R)) {
+            this.scene.testReset();
         }
     }
 
@@ -103,13 +121,22 @@ class Player extends Phaser.GameObjects.Sprite {
         player grabs wall, stamina depletes
         by 1 (?) every second 
     */
-    grabWall(dt) {
+    grabWall() {
         if(this.stamina <= 0) {
+            this.body.setAllowGravity(true);
             return;
         }
         
-        this.stamina -= 1 * dt;
-        this.body.setVelocityY(0);
+        this.stamina -= 1;
+        this.y -= 2;
+        console.log(this.stamina);
+    }
+
+    updateStamina() {
+        if(this.stamina < PLAYER_STAMINA) {
+            this.stamina += 1;
+            console.log(this.stamina);
+        }
     }
     
 }
