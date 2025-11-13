@@ -8,6 +8,9 @@ class Player extends Phaser.GameObjects.Sprite {
         //general init
         this.name = name;
         this.scene = scene;
+        this.x = x;
+        this.y = y;
+
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setCollideWorldBounds(false);
@@ -119,8 +122,27 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setAllowGravity(true);
         }
 
+        this.checkFall();
+
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
             this.scene.testReset();
+        }
+    }
+
+    checkFall() {
+        if(this.y > 720 && this.totalLives > 0) {
+            this.totalLives--;
+            
+            // moves player back to closest platform
+             this.x -= 30;
+            this.y = 250;
+
+            this.scene.tweens.add({
+                targets: this,
+                duration: 250,
+                alpha: {from: 0, to: 1},
+                repeat: 5
+            });
         }
     }
 
@@ -144,6 +166,10 @@ class Player extends Phaser.GameObjects.Sprite {
             this.stamina += 1;
             console.log(this.stamina);
         }
+    }
+
+    restartPlayer() {
+        super.destroy();
     }
     
 }
