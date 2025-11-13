@@ -62,6 +62,7 @@ class Player extends Phaser.GameObjects.Sprite {
         // player jumps when pressing up '^' key
         this.keyIn.up.on('down', function() {
             if(this.body.blocked.down) {
+                //this.sound.play();
                 this.body.setVelocityY(-280);
             }
         }, this);
@@ -102,6 +103,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.anims.play('idle');
         }
         
+        //wall grabbing
         if(this.body.blocked.right || this.body.blocked.left ? true : false) {
             this.body.isStatic = true;
             this.body.setAllowGravity(false);
@@ -122,6 +124,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setAllowGravity(true);
         }
 
+        //checks player fall, handles death
         this.checkFall();
 
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
@@ -134,7 +137,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.totalLives--;
             
             // moves player back to closest platform
-             this.x -= 30;
+            this.x -= 30;
             this.y = 250;
 
             this.scene.tweens.add({
