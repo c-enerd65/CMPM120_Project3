@@ -25,6 +25,18 @@ export class LevelOne extends Phaser.Scene{
         this.levelCamera();
     }
 
+    update() {
+        this.player.update();
+        
+        if(this.player.lives <= 0)
+        {
+            this.player.destroy();
+
+            this.scene.stop(this.scene);
+            this.scene.start('End');
+        }
+    }
+
     mapCollisions(tileset) {
         var ground = this.map.createLayer("ground", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
@@ -42,11 +54,7 @@ export class LevelOne extends Phaser.Scene{
         this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
     }
 
-    update() {
-        this.player.update();
-    } 
-
-    testReset() {
+    resetGame() {
         this.scene.stop(this.scene);
         this.player.restartPlayer();
         this.scene.start('LevelOne');

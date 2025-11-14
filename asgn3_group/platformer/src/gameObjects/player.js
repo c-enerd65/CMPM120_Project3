@@ -22,7 +22,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         //Status variables [subject to change]
         this.score = 0;
-        this.totalLives = TOTAL_LIVES;
+        this.lives = TOTAL_LIVES;
         this.stamina = PLAYER_STAMINA; 
         
         //player boost flag
@@ -131,27 +131,32 @@ class Player extends Phaser.GameObjects.Sprite {
         //checks player fall, handles death
         this.checkFall();
 
+        //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
             this.scene.testReset();
         }
     }
 
     checkFall() {
-        if(this.y > 720 && this.totalLives > 0) {
-            //this.sound.play()
-            this.totalLives--;
-            
+        if(this.y > 720 && this.lives > 0) {
             // moves player back to closest platform
             this.x -= 30;
             this.y = 250;
 
-            this.scene.tweens.add({
-                targets: this,
-                duration: 250,
-                alpha: {from: 0, to: 1},
-                repeat: 5
-            });
+            this.playerDamaged();
         }
+    }
+
+    playerDamaged() {
+        //this.sound.play()
+        this.lives--;
+
+        this.scene.tweens.add({
+            targets: this,
+            duration: 250,
+            alpha: {from: 0, to: 1},
+            repeat: 5
+        });
     }
 
     grabWall() {
@@ -170,6 +175,7 @@ class Player extends Phaser.GameObjects.Sprite {
         }
     }
 
+    //remove later
     restartPlayer() {
         this.destroy();
     }
