@@ -29,8 +29,8 @@ export class Start extends Phaser.Scene {
         this.load.image('score', 'assets/scoreBar.png');
         this.load.image('startScreen', 'assets/startScreen.png');
         this.load.image('startPrompt', 'assets/pAB_logo.png');
-        this.load.image('bullet_1', 'assets/donut_1.png');
-        this.load.image('bullet_2', 'assets/donut_2.png');
+        this.load.image('boost_1', 'assets/donut_1.png');
+        this.load.image('boost_2', 'assets/donut_2.png');
     }
 
     loadSpritesheets() {

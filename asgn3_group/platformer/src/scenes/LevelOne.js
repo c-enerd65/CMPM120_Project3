@@ -1,4 +1,5 @@
 import Player from '../gameObjects/player.js';
+import Boost from '../gameObjects/boost.js';
 
 export class LevelOne extends Phaser.Scene{
     constructor() {
@@ -23,6 +24,12 @@ export class LevelOne extends Phaser.Scene{
 
         this.mapCollisions(tileset);
         this.levelCamera();
+
+        this.generateBoosts();
+
+        this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+
+        this.levelCollisions();
     }
 
     update() {
@@ -34,6 +41,11 @@ export class LevelOne extends Phaser.Scene{
 
             this.scene.stop(this.scene);
             this.scene.start('End');
+        }
+
+        //remove later
+        if(Phaser.Input.Keyboard.JustDown(this.R)) {
+            this.resetGame();
         }
     }
 
@@ -54,9 +66,18 @@ export class LevelOne extends Phaser.Scene{
         this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
     }
 
+    generateBoosts() {
+        this.boost = new Boost(this, 50, 350, 'boost_1');
+    }
+
+    levelCollisions() {
+
+    }
+
     resetGame() {
+        this.player.destroy();
+
         this.scene.stop(this.scene);
-        this.player.restartPlayer();
         this.scene.start('LevelOne');
     }
 }

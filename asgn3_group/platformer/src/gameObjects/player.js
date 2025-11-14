@@ -74,7 +74,6 @@ class Player extends Phaser.GameObjects.Sprite {
         //space bar for something??????
         //from prev iteration could recycle for something lul
         this.SPACE = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.R = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
 
     update(time, delta)
@@ -130,11 +129,6 @@ class Player extends Phaser.GameObjects.Sprite {
 
         //checks player fall, handles death
         this.checkFall();
-
-        //remove later
-        if(Phaser.Input.Keyboard.JustDown(this.R)) {
-            this.scene.testReset();
-        }
     }
 
     checkFall() {
@@ -174,12 +168,6 @@ class Player extends Phaser.GameObjects.Sprite {
             this.stamina += 1;
         }
     }
-
-    //remove later
-    restartPlayer() {
-        this.destroy();
-    }
-    
 }
 
 export default Player;
