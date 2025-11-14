@@ -21,7 +21,8 @@ class Foes extends Phaser.GameObjects.PathFollower {
         this.body.setAllowGravity(true);
         this.body.setCircle(8);
         this.body.setOffset(0,1);
-        this.body.setVelocityX(velX);
+        
+        this.velX = velX;
 
         this.damage = FOE_TYPE[name].damage;
         this.points = FOE_TYPE[name].points;
@@ -51,6 +52,18 @@ class Foes extends Phaser.GameObjects.PathFollower {
         {
             this.destroy();
         }
+
+        this.checkBlocked();
+    }
+
+    checkBlocked() {
+        if(this.body.blocked.left) {
+            this.body.setVelocityX(this.velX);
+        }
+        else if(this.body.blocked.right) {
+            this.body.setVelocityX(-this.velX);
+        }
+
     }
 }
 

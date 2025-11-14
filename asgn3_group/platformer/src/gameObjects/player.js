@@ -134,6 +134,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
     checkFall() {
         if(this.y > 720 && this.totalLives > 0) {
+            //this.sound.play()
             this.totalLives--;
             
             // moves player back to closest platform
@@ -172,7 +173,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     restartPlayer() {
-        super.destroy();
+        this.destroy();
     }
     
 }
