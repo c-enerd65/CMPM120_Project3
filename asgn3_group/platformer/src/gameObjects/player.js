@@ -1,4 +1,8 @@
 const PLAYER_STAMINA = 100;
+const PLAYER_VELOCITY = 200;
+const PLAYER_JUMP = -280;
+
+const TOTAL_LIVES = 3;
 
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, name = 'player')
@@ -18,7 +22,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         //Status variables [subject to change]
         this.score = 0;
-        this.totalLives = 3;
+        this.totalLives = TOTAL_LIVES;
         this.stamina = PLAYER_STAMINA; 
         
         //player boost flag
@@ -63,7 +67,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.keyIn.up.on('down', function() {
             if(this.body.blocked.down) {
                 //this.sound.play();
-                this.body.setVelocityY(-280);
+                this.body.setVelocityY(PLAYER_JUMP);
             }
         }, this);
 
@@ -91,11 +95,11 @@ class Player extends Phaser.GameObjects.Sprite {
 
         //general player movements [subject to change]
         if(this.keyIn.left.isDown) {
-            this.body.setVelocityX(-200);
+            this.body.setVelocityX(-PLAYER_VELOCITY);
             this.x -= 2 * this.boost;
             this.anims.play('walk', true);
         } else if(this.keyIn.right.isDown) {
-            this.body.setVelocityX(200);
+            this.body.setVelocityX(PLAYER_VELOCITY);
             this.x += 2 * this.boost;
             this.anims.play('walk', true);
         } else {
@@ -150,10 +154,6 @@ class Player extends Phaser.GameObjects.Sprite {
         }
     }
 
-    /*
-        player grabs wall, stamina depletes
-        by 1 (?) every second 
-    */
     grabWall() {
         if(this.stamina <= 0) {
             this.body.setAllowGravity(true);
@@ -162,13 +162,11 @@ class Player extends Phaser.GameObjects.Sprite {
         
         this.stamina -= 1;
         this.y -= 2;
-        console.log(this.stamina);
     }
 
     updateStamina() {
         if(this.stamina < PLAYER_STAMINA) {
             this.stamina += 1;
-            console.log(this.stamina);
         }
     }
 
