@@ -12,7 +12,7 @@ export class Start extends Phaser.Scene {
     }
 
     create() {
-        //change all
+        //change all - Start Screen Images
         this.background = this.add.sprite(640, 360, 'startScreen').setScale(3);
         this.promptPlay = this.add.sprite(640, 540, 'startPrompt');
         this.alien = this.add.sprite(640, 280, 'player').setScale(10);

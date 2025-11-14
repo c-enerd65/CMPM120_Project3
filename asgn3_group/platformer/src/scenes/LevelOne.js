@@ -23,11 +23,11 @@ export class LevelOne extends Phaser.Scene{
         //creates a new player, sets sprite scale 2x original size
         this.player = new Player(this, 0, 250);
 
-        this.mapCollisions(tileset);
-        this.levelCamera();
-
         this.generateBoosts();
         this.generateMobs();
+
+        this.mapCollisions(tileset);
+        this.levelCamera();
 
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
@@ -55,6 +55,7 @@ export class LevelOne extends Phaser.Scene{
         var ground = this.map.createLayer("ground", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
         this.physics.add.collider(ground, this.player);
+        this.physics.add.collider(ground, this.foe);
 
         var grab = this.map.createLayer("grab", tileset, 0, 0);
         grab.setCollisionBetween(1, this.width);
@@ -86,7 +87,7 @@ export class LevelOne extends Phaser.Scene{
 
     generateMobs() {
         const foePath = () => {
-            this.path = new Phaser.Curves.Path(450, 400);
+            this.path = new Phaser.Curves.Path(550, 400);
             this.path.lineTo(650, 400);
         }
 

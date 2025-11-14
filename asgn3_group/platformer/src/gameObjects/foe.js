@@ -18,7 +18,7 @@ class Foe extends Phaser.GameObjects.PathFollower {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setAllowGravity(false);
+        this.body.setAllowGravity(true);
         this.body.setCircle(8);
         this.body.setOffset(0,1);
         

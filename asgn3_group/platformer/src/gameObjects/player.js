@@ -1,6 +1,6 @@
 const PLAYER_STAMINA = 100;
 const PLAYER_VELOCITY = 200;
-const PLAYER_JUMP = -280;
+const PLAYER_JUMP = -225;
 
 const TOTAL_LIVES = 3;
 
