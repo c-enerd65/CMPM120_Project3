@@ -39,9 +39,9 @@ export class Start extends Phaser.Scene {
             frameHeight: 24
             });
         
-        for(let i = 1; i < 4; i++)
+        for(let i = 1; i < 3; i++)
         {
-            this.load.spritesheet(`foe_${i}`, `assets/foeSprite_${i}.png`, {
+            this.load.spritesheet(`lvl${i}_foe`, `assets/foeSprite_${i}.png`, {
                 frameWidth: 16,
                 frameHeight: 16
             });

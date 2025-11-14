@@ -9,8 +9,8 @@ const FOE_TYPE = {
     }
 }
 
-class Foes extends Phaser.GameObjects.PathFollower {
-    constructor(scene, path, x, y, name = 'foe_1', velX = 150) {
+class Foe extends Phaser.GameObjects.PathFollower {
+    constructor(scene, path, x, y, name = 'lvl1_foe', velX = 150) {
         super(scene, path, x, y, name);
 
         this.name = name;
@@ -18,7 +18,7 @@ class Foes extends Phaser.GameObjects.PathFollower {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setAllowGravity(true);
+        this.body.setAllowGravity(false);
         this.body.setCircle(8);
         this.body.setOffset(0,1);
         
@@ -29,7 +29,7 @@ class Foes extends Phaser.GameObjects.PathFollower {
 
         this.startFollow({
             duration: 1000,
-            repeat: 0
+            repeat: -1
         });
 
         this.init();
@@ -52,19 +52,7 @@ class Foes extends Phaser.GameObjects.PathFollower {
         {
             this.destroy();
         }
-
-        this.checkBlocked();
-    }
-
-    checkBlocked() {
-        if(this.body.blocked.left) {
-            this.body.setVelocityX(this.velX);
-        }
-        else if(this.body.blocked.right) {
-            this.body.setVelocityX(-this.velX);
-        }
-
     }
 }
 
-export default Foes;
+export default Foe;

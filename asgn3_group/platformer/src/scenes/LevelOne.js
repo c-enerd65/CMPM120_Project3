@@ -1,5 +1,6 @@
 import Player from '../gameObjects/player.js';
 import Boost from '../gameObjects/boost.js';
+import Foe from '../gameObjects/foe.js';
 
 export class LevelOne extends Phaser.Scene{
     constructor() {
@@ -26,6 +27,7 @@ export class LevelOne extends Phaser.Scene{
         this.levelCamera();
 
         this.generateBoosts();
+        this.generateMobs();
 
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
@@ -80,6 +82,19 @@ export class LevelOne extends Phaser.Scene{
 
             this.availBoost.add(boost);
         }
+    }
+
+    generateMobs() {
+        const foePath = () => {
+            this.path = new Phaser.Curves.Path(450, 400);
+            this.path.lineTo(650, 400);
+        }
+
+        foePath()
+        this.graphics = this.add.graphics();
+        this.path.draw(this.graphics);
+
+        this.foe = new Foe(this, this.path, 550, 340);
     }
 
     levelCollisions() {
