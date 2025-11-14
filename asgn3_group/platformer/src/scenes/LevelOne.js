@@ -35,13 +35,13 @@ export class LevelOne extends Phaser.Scene{
     update() {
         this.player.update();
         
-        if(this.player.lives <= 0)
+        /*if(this.player.lives <= 0)
         {
             this.player.destroy();
 
             this.scene.stop(this.scene);
             this.scene.start('End');
-        }
+        }*/
 
         //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
@@ -67,11 +67,54 @@ export class LevelOne extends Phaser.Scene{
     }
 
     generateBoosts() {
-        this.boost = new Boost(this, 50, 350, 'boost_1');
+        this.availBoost = this.add.group();
+
+        const bSpawn = {
+            x: [50, 150],
+            y: [350, 310]
+        }
+
+        for(let i = 0; i < bSpawn.x.length; i++) {
+            let rand = Math.ceil(Math.random() * 2)
+            let boost = new Boost(this, bSpawn.x[i], bSpawn.y[i], `boost_${rand}`);
+
+            this.availBoost.add(boost);
+        }
     }
 
     levelCollisions() {
+        this.physics.add.collider(
+            this.availBoost,
+            this.player,
+            this.playerBoost,
+            () => {
+                return true;
+            },
+            this
+        );
 
+    }
+
+    playerBoost(boost) {
+        //this.sound.play();
+
+        switch(boost.type) {
+            case 'stamina':
+                this.player.stamina += boost.modifier;
+                break;
+            case 'speed':
+                this.player.boost = boost.modifier;
+                this.tweens.add({
+                    targets: [this.player],
+                    completeDelay: 1500, //duration flexible
+                    onComplete: () => {
+                        this.player.boost = 1;
+                    }                     
+                });
+                break;
+        }
+
+        boost.destroy();
     }
 
     resetGame() {

@@ -16,7 +16,7 @@ class Boost extends Phaser.GameObjects.Sprite {
         this.name = name;
         this.scene = scene;
         this.type = BOOST_TYPE[name].type;
-        this.addBoost = BOOST_TYPE[name].boost;
+        this.modifier = BOOST_TYPE[name].boost;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);

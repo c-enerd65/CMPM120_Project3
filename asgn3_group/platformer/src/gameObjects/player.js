@@ -25,8 +25,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.lives = TOTAL_LIVES;
         this.stamina = PLAYER_STAMINA; 
         
-        //player boost flag
-        this.hasBoost = false;
+        this.speed = PLAYER_VELOCITY;
         this.boost = 1;
 
         //init animations
@@ -80,31 +79,9 @@ class Player extends Phaser.GameObjects.Sprite {
     {
         this.body.isStatic = false;
         this.body.setAllowGravity(true);
-        
-        //if player has boost
-        //add tween and sound
-        if(this.hasBoost)
-        {
-            this.boost = 3;
 
-            this.add.tweens({
-                
-            });
-        }
-
-        //general player movements [subject to change]
-        if(this.keyIn.left.isDown) {
-            this.body.setVelocityX(-PLAYER_VELOCITY);
-            this.x -= 2 * this.boost;
-            this.anims.play('walk', true);
-        } else if(this.keyIn.right.isDown) {
-            this.body.setVelocityX(PLAYER_VELOCITY);
-            this.x += 2 * this.boost;
-            this.anims.play('walk', true);
-        } else {
-            this.body.setVelocityX(0);
-            this.anims.play('idle');
-        }
+        let speed = this.speed * this.boost;
+        this.movePlayer(speed);
         
         //wall grabbing
         if(this.body.blocked.right || this.body.blocked.left ? true : false) {
@@ -134,10 +111,23 @@ class Player extends Phaser.GameObjects.Sprite {
     checkFall() {
         if(this.y > 720 && this.lives > 0) {
             // moves player back to closest platform
-            this.x -= 30;
+            this.x = 0;
             this.y = 250;
 
             this.playerDamaged();
+        }
+    }
+
+    movePlayer(speed) {
+        if(this.keyIn.left.isDown) {
+            this.body.setVelocityX(-speed);
+            this.anims.play('walk', true);
+        } else if(this.keyIn.right.isDown) {
+            this.body.setVelocityX(speed);
+            this.anims.play('walk', true);
+        } else {
+            this.body.setVelocityX(0);
+            this.anims.play('idle');
         }
     }
 
@@ -147,7 +137,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         this.scene.tweens.add({
             targets: this,
-            duration: 250,
+            duration: 1000,
             alpha: {from: 0, to: 1},
             repeat: 5
         });
