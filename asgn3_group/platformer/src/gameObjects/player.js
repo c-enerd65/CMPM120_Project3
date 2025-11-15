@@ -71,7 +71,7 @@ class Player extends Phaser.GameObjects.Sprite {
         // player jumps when pressing up '^' key
         this.keyIn.up.on('down', function() {
             if(this.body.blocked.down) {
-                //this.sound.play();
+                this.scene.playAudio('jump');
                 this.body.setVelocityY(PLAYER_JUMP);
             }
         }, this);

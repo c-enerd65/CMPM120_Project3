@@ -50,6 +50,7 @@ export class Start extends Phaser.Scene {
 
     loadGameAudio() {
         this.load.audio('laser', 'assets/sound/laserRetro_001.ogg');
+        this.load.audio('jump', 'assets/sound/slime_jump.mp3');
     }
 
     loadMaps() {

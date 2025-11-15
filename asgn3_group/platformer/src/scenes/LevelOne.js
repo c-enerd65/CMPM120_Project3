@@ -28,6 +28,7 @@ export class LevelOne extends Phaser.Scene{
 
         this.mapCollisions(tileset);
         this.levelCamera();
+        this.loadAudio();
 
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
@@ -67,6 +68,16 @@ export class LevelOne extends Phaser.Scene{
         this.playerCam = this.cameras.main.setBounds(0, 0, this.width, this.height); //creates camera var
         this.playerCam.startFollow(this.player, true, 0.5, 0.5, -200, 120); //sets camera to follow player
         this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
+    }
+
+    loadAudio() {
+        this.audioFiles = {
+            jump: this.sound.add('jump')
+        };
+    }
+
+    playAudio(key) {
+        this.audioFiles[key].play();
     }
 
     generateBoosts() {
