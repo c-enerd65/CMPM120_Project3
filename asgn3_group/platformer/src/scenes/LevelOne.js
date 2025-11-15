@@ -89,10 +89,10 @@ export class LevelOne extends Phaser.Scene{
         const foePath = () => {
             this.path = new Phaser.Curves.Path(550, 400);
             this.path.lineTo(650, 400);
+            this.graphics = this.add.graphics();
         }
 
         foePath()
-        this.graphics = this.add.graphics();
         this.path.draw(this.graphics);
 
         this.foe = new Foe(this, this.path, 550, 340);

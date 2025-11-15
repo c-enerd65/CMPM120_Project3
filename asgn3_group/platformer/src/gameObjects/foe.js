@@ -19,8 +19,7 @@ class Foe extends Phaser.GameObjects.PathFollower {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setAllowGravity(true);
-        this.body.setCircle(8);
-        this.body.setOffset(0,1);
+        this.body.setCircle(12);
         
         this.velX = velX;
 
@@ -28,23 +27,41 @@ class Foe extends Phaser.GameObjects.PathFollower {
         this.points = FOE_TYPE[name].points;
 
         this.startFollow({
-            duration: 1000,
-            repeat: -1
+            duration: 12000,
+            repeat: -1,
+            yoyo: true
         });
 
         this.init();
     }
 
     init() {
-        this.scene.anims.create({
-            key: `${this.name}_walk`,
-            frames: this.anims.generateFrameNumbers(this.name, {
-            frames: []
-            }),
-            frameRate: 3,
-            repeat: -1,
-            yoyo: true
-        }); 
+        if(this.name === 'lvl1_foe') {
+            this.scene.anims.create({
+                key: `${this.name}_walk`,
+                frames: this.anims.generateFrameNumbers(this.name, { 
+                    start: 0,
+                    end: 1 
+                }),
+                frameRate: 10,
+                repeat: -1,
+                yoyo: true
+            });
+        } 
+        else {
+            this.scene.anims.create({
+                key: `${this.name}_walk`,
+                frames: this.anims.generateFrameNumbers(this.name, { 
+                    start: 0,
+                    end: 2 
+                }),
+                frameRate: 10,
+                repeat: -1,
+                yoyo: true
+            });
+        }
+
+        this.anims.play(`${this.name}_walk`, true);
     }
 
     preUpdate(time, delta) {

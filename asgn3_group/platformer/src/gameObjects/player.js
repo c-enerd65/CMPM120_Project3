@@ -39,7 +39,10 @@ class Player extends Phaser.GameObjects.Sprite {
         //idle animation
         this.scene.anims.create({
             key: 'idle',
-            frames: this.anims.generateFrameNumbers(this.name, { start: 0, end: 0 }),
+            frames: this.anims.generateFrameNumbers(this.name, { 
+                start: 0, 
+                end: 0 
+            }),
             frameRate: 10,
             repeat: -1,
             yoyo: true
@@ -48,7 +51,10 @@ class Player extends Phaser.GameObjects.Sprite {
         //walk animation
         this.scene.anims.create({
             key: 'walk',
-            frames: this.anims.generateFrameNumbers(this.name, { start: 0, end: 1 }),
+            frames: this.anims.generateFrameNumbers(this.name, { 
+                start: 0,
+                end: 1 
+            }),
             frameRate: 10,
             repeat: -1,
             yoyo: true
