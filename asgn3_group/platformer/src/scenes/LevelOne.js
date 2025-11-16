@@ -131,11 +131,13 @@ export class LevelOne extends Phaser.Scene{
                 break;
             case 'speed':
                 this.player.boost = boost.modifier;
+                this.player.runTrail.start();
                 this.tweens.add({
                     targets: [this.player],
                     completeDelay: 1500, //duration flexible
                     onComplete: () => {
                         this.player.boost = 1;
+                        this.player.runTrail.stop();
                     }                     
                 });
                 break;

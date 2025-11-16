@@ -30,6 +30,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         //init animations
         this.init();
+        this.initParticles();
         //set player controls
         this.playerControls();
     }
@@ -62,6 +63,26 @@ class Player extends Phaser.GameObjects.Sprite {
 
         //defaults idle
         this.anims.play('idle', true);
+    }
+
+    initParticles() {
+        this.runTrail = this.scene.add.particles(this.x, this.y, 'star_01', {
+            quantity: 100,
+            speedY: {
+                min: 20,
+                max: 20
+            },
+            speedX: {
+                min: 30,
+                max: 70
+            },
+            scale: {
+            },
+            blendMode: 'ADD',
+            frequency: -1,
+            follow: this,
+            tint: 0xffadd2 
+        });
     }
 
     playerControls()

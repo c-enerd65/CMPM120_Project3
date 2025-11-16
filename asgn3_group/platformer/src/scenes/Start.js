@@ -18,10 +18,10 @@ export class Start extends Phaser.Scene {
         this.alien = this.add.sprite(640, 280, 'player').setScale(10);
        
         //allows any key press to move to next scene
-        this.input.keyboard.on('keydown', () => {
+        //this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
             this.scene.start('LevelOne');
-        });
+        //});
     }
 
     loadGameImages() {
@@ -31,6 +31,7 @@ export class Start extends Phaser.Scene {
         this.load.image('startPrompt', 'assets/pAB_logo.png');
         this.load.image('boost_1', 'assets/sprites/donut_1.png');
         this.load.image('boost_2', 'assets/sprites/donut_2.png');
+        this.load.image('star_1', 'assets/particles/star_07.png');
     }
 
     loadSpritesheets() {
