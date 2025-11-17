@@ -23,12 +23,17 @@ export class LevelOne extends Phaser.Scene{
         //creates a new player, sets sprite scale 2x original size
         this.player = new Player(this, 0, 250);
 
+        this.initParticles();
+        this.runTrail.start();
+
         this.generateBoosts();
         this.generateMobs();
 
         this.mapCollisions(tileset);
         this.levelCamera();
         this.loadAudio();
+
+        this.playAudio('theme');
 
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
@@ -72,12 +77,38 @@ export class LevelOne extends Phaser.Scene{
 
     loadAudio() {
         this.audioFiles = {
-            jump: this.sound.add('jump')
+            jump: this.sound.add('jump'),
+            theme: this.sound.add('lvl1_theme')
         };
     }
 
     playAudio(key) {
         this.audioFiles[key].play();
+    }
+
+    initParticles() {
+        this.runTrail = this.add.particles(this.player.x, this.player.y, 'star_1', {
+            quantity: 100,
+            accelerationX: 1000,
+            speedY: {
+                min: 20,
+                max: 20
+            },
+            speedX: {
+                min: 30,
+                max: 70
+            },
+            scale: {
+                start: 0.1,
+                end: 0.01,
+                random: true
+            },
+            blendMode: 'ADD',
+            frequency: -1,
+            follow: this.player,
+            followOffest: {},
+            tint: 0xffadd2 
+        });
     }
 
     generateBoosts() {
@@ -131,13 +162,13 @@ export class LevelOne extends Phaser.Scene{
                 break;
             case 'speed':
                 this.player.boost = boost.modifier;
-                this.player.runTrail.start();
+                this.runTrail.start();
                 this.tweens.add({
                     targets: [this.player],
                     completeDelay: 1500, //duration flexible
                     onComplete: () => {
                         this.player.boost = 1;
-                        this.player.runTrail.stop();
+                        this.runTrail.stop();
                     }                     
                 });
                 break;
