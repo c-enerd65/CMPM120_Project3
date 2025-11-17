@@ -5,9 +5,10 @@
     },
     "activeFile": "",
     "expandedProjectPaths": [
-        "Tiles_1",
-        "."
+        ".",
+        "Tiles_1"
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "Tiles_1/tile_0000.tsx": {
             "scaleInDock": 1,
@@ -26,8 +27,6 @@
     "map.tileWidth": 16,
     "map.width": 120,
     "openFiles": [
-        "Tiles_1/tile_0000.tsx",
-        "Tiles_2/monochrome_tilemap.tsx"
     ],
     "project": "Project 3.tiled-project",
     "recentFiles": [
