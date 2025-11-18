@@ -43,6 +43,7 @@ export class LevelOne extends Phaser.Scene{
     update() {
         this.player.update();
         
+        //end state for player death
         /*if(this.player.lives <= 0)
         {
             this.player.destroy();
