@@ -59,6 +59,8 @@ class Foe extends Phaser.GameObjects.Sprite {
                 yoyo: true
             });
         }
+
+        this.anims.play(`${this.name}_walk`, true);
     }
 
     update() {
@@ -88,10 +90,11 @@ class Foe extends Phaser.GameObjects.Sprite {
     startMove_vertical() {
         if(this.body.blocked.down) {
             this.body.setVelocityX(0);
+            this.body.setAllowGravity(false);
 
             this.scene.tweens.add({
                 targets: this,
-                duration: 750,
+                duration: 1000,
                 y: {
                     from: this.y, 
                     to: this.y - 50

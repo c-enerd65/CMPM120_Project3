@@ -151,7 +151,7 @@ export class LevelOne extends Phaser.Scene{
     }
 
     generateMobs() {
-        this.foe = new Foe(this, 550, 350, 'lvl3_foe');
+        this.foe = new Foe(this, 550, 350, 'lvl2_foe');
     }
 
     levelCollisions() {
@@ -183,7 +183,7 @@ export class LevelOne extends Phaser.Scene{
                 this.playAudio('run');
                 this.tweens.add({
                     targets: [this.player],
-                    completeDelay: 2500, //duration flexible
+                    completeDelay: 3750,
                     onComplete: () => {
                         this.player.boost = 1;
                         this.runTrail.stop();
