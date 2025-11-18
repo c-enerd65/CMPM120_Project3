@@ -36,6 +36,7 @@ export class LevelTwo extends Phaser.Scene{
         this.playAudio('theme');
 
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        this.ONE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
         this.levelCollisions();
     }
@@ -54,6 +55,12 @@ export class LevelTwo extends Phaser.Scene{
         //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
             this.resetGame();
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(this.ONE)) {
+            this.scene.stop(this);
+            this.stopAudio('theme');
+            this.scene.start('LevelOne');
         }
     }
 
@@ -84,6 +91,10 @@ export class LevelTwo extends Phaser.Scene{
 
     playAudio(key) {
         this.audioFiles[key].play();
+    }
+
+    stopAudio(key) {
+        this.audioFiles[key].stop();
     }
 
     initParticles() {
