@@ -1,5 +1,6 @@
 import { Start } from './scenes/Start.js';
 import { LevelOne } from './scenes/LevelOne.js';
+import { LevelTwo } from './scenes/LevelTwo.js';
 import { End } from './scenes/End.js';
 
 const config = {
@@ -21,6 +22,7 @@ const config = {
     scene: [
         Start, 
         LevelOne,
+        LevelTwo,
         End
     ],
     scale: {
