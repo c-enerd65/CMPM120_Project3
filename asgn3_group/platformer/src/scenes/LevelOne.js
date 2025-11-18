@@ -21,10 +21,10 @@ export class LevelOne extends Phaser.Scene{
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 250);
+        this.player = new Player(this, 25, 250);
 
         this.initParticles();
-        this.runTrail.start();
+        this.runTrail.stop();
 
         this.generateBoosts();
         this.generateMobs();
@@ -99,27 +99,27 @@ export class LevelOne extends Phaser.Scene{
     }
 
     initParticles() {
-        this.runTrail = this.add.particles(this.player.x, this.player.y, 'star_1', {
-            quantity: 100,
-            accelerationX: 1000,
+        this.runTrail = this.add.particles(-8, 8, 'star', {
+            quantity: 10,
+            accelerationX: -500,
+            accelerationY:  -200,
             speedY: {
-                min: 20,
-                max: 20
+                min: 10,
+                max: 80
             },
             speedX: {
-                min: 30,
-                max: 70
+                min: 10,
+                max: 150
             },
             scale: {
-                start: 0.1,
-                end: 0.01,
+                start: 0.06,
+                end: 0.004,
                 random: true
             },
             blendMode: 'ADD',
-            frequency: -1,
+            frequency: 100,
             follow: this.player,
-            followOffest: {},
-            tint: 0xffadd2 
+            tint: 0xBAE2FF 
         });
     }
 
@@ -177,7 +177,7 @@ export class LevelOne extends Phaser.Scene{
                 this.runTrail.start();
                 this.tweens.add({
                     targets: [this.player],
-                    completeDelay: 1500, //duration flexible
+                    completeDelay: 2500, //duration flexible
                     onComplete: () => {
                         this.player.boost = 1;
                         this.runTrail.stop();
@@ -193,6 +193,7 @@ export class LevelOne extends Phaser.Scene{
         this.player.destroy();
 
         this.scene.stop(this.scene);
+        this.stopAudio('theme');
         this.scene.start('LevelOne');
     }
 }
