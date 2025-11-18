@@ -43,6 +43,7 @@ export class LevelOne extends Phaser.Scene{
 
     update() {
         this.player.update();
+        this.foe.update();
         
         //end state for player death
         /*if(this.player.lives <= 0)
@@ -74,6 +75,7 @@ export class LevelOne extends Phaser.Scene{
         var grab = this.map.createLayer("grab", tileset, 0, 0);
         grab.setCollisionBetween(1, this.width);
         this.physics.add.collider(grab, this.player);
+        this.physics.add.collider(grab, this.foe);
     }
 
     levelCamera() {
@@ -86,12 +88,21 @@ export class LevelOne extends Phaser.Scene{
     loadAudio() {
         this.audioFiles = {
             jump: this.sound.add('jump'),
-            theme: this.sound.add('lvl1_theme')
+            theme: this.sound.add('lvl1_theme'),
+            run: this.sound.add('runBoost'),
+            stamina: this.sound.add('staminaBoost')
         };
     }
 
     playAudio(key) {
-        this.audioFiles[key].play();
+        if(key === 'theme' || key === 'run') {
+            this.audioFiles[key].play({
+                loop: true
+            });
+        }
+        else {
+            this.audioFiles[key].play();
+        }
     }
 
     stopAudio(key) {
@@ -140,16 +151,7 @@ export class LevelOne extends Phaser.Scene{
     }
 
     generateMobs() {
-        const foePath = () => {
-            this.path = new Phaser.Curves.Path(550, 400);
-            this.path.lineTo(650, 400);
-            this.graphics = this.add.graphics();
-        }
-
-        foePath()
-        this.path.draw(this.graphics);
-
-        this.foe = new Foe(this, this.path, 550, 340);
+        this.foe = new Foe(this, 550, 350, 'lvl3_foe');
     }
 
     levelCollisions() {
@@ -166,21 +168,26 @@ export class LevelOne extends Phaser.Scene{
     }
 
     playerBoost(boost) {
-        //this.sound.play();
-
         switch(boost.type) {
             case 'stamina':
                 this.player.stamina += boost.modifier;
+                this.player.tint = 0xA8E477;
+                this.playAudio('stamina');
+                this.time.delayedCall(275, () => {
+                    this.player.tint = 0xFFFFFF;
+                })
                 break;
             case 'speed':
                 this.player.boost = boost.modifier;
                 this.runTrail.start();
+                this.playAudio('run');
                 this.tweens.add({
                     targets: [this.player],
                     completeDelay: 2500, //duration flexible
                     onComplete: () => {
                         this.player.boost = 1;
                         this.runTrail.stop();
+                        this.stopAudio('run');
                     }                     
                 });
                 break;

@@ -144,9 +144,12 @@ class Player extends Phaser.GameObjects.Sprite {
 
         this.scene.tweens.add({
             targets: this,
-            duration: 1000,
-            alpha: {from: 0, to: 1},
-            repeat: 5
+            duration: 750,
+            alpha: {
+                from: 0,
+                to: 1
+            },
+            repeat: 4
         });
     }
 

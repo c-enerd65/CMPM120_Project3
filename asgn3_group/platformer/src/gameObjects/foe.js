@@ -6,12 +6,16 @@ const FOE_TYPE = {
     lvl2_foe: {
         damage: 2,
         points: 10
+    },
+    lvl3_foe: {
+        damage: 3,
+        points: 15
     }
 }
 
-class Foe extends Phaser.GameObjects.PathFollower {
-    constructor(scene, path, x, y, name = 'lvl1_foe', velX = 150) {
-        super(scene, path, x, y, name);
+class Foe extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, name = 'lvl1_foe', velX = 75) {
+        super(scene, x, y, name);
 
         this.name = name;
         this.scene = scene;
@@ -22,15 +26,10 @@ class Foe extends Phaser.GameObjects.PathFollower {
         this.body.setCircle(12);
         
         this.velX = velX;
+        this.body.setVelocityX(this.velX);
 
         this.damage = FOE_TYPE[name].damage;
         this.points = FOE_TYPE[name].points;
-
-        this.startFollow({
-            duration: 12000,
-            repeat: -1,
-            yoyo: true
-        });
 
         this.init();
     }
@@ -60,14 +59,47 @@ class Foe extends Phaser.GameObjects.PathFollower {
                 yoyo: true
             });
         }
-
-        this.anims.play(`${this.name}_walk`, true);
     }
 
-    preUpdate(time, delta) {
-        if(!this.isFollowing() || this.y > 740)
+    update() {
+        switch(this.name)
         {
-            this.destroy();
+            case 'lvl3_foe':
+                this.startMove_vertical();
+                break;
+            default:
+                this.startMove_horizontal();
+                break;
+        }
+    }
+
+    startMove_horizontal() {
+        if(this.body.blocked.down)
+        {
+            if(this.body.blocked.left) {
+                this.body.setVelocityX(this.velX);
+            }
+            else if(this.body.blocked.right) {
+                this.body.setVelocityX(-this.velX);
+            }
+        }
+    }
+
+    startMove_vertical() {
+        if(this.body.blocked.down) {
+            this.body.setVelocityX(0);
+
+            this.scene.tweens.add({
+                targets: this,
+                duration: 750,
+                y: {
+                    from: this.y, 
+                    to: this.y - 50
+                },
+                repeat: -1,
+                yoyo: true,
+                ease: 'Linear'
+            })
         }
     }
 }
