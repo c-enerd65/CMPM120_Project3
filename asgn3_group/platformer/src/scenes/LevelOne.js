@@ -16,13 +16,16 @@ export class LevelOne extends Phaser.Scene{
         this.height = this.sys.game.config.height;
         this.center_h = this.height / 2;
 
+        this.playerStartX = 15;
+        this.playerStartY = 225;
+
         //add tilemap
         this.map = this.add.tilemap('tilemap_1');
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
         this.map.createLayer("background", tileset, 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 15, 230);
+        this.player = new Player(this, this.playerStartX, this.playerStartY);
 
         this.initParticles();
         this.runTrail.stop();
@@ -74,9 +77,33 @@ export class LevelOne extends Phaser.Scene{
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foes);
 
-        this.map.createLayer("over", tileset, 0, 0);
-        this.map.createLayer("deathZone", tileset, 0, 0);
-        this.map.createLayer("spikes", tileset, 0, 0);
+        var foe_zone = this.map.createLayer("foeZone", tileset, 0, 0);
+        foe_zone.setCollisionBetween(1, this.width);
+        this.physics.add.collider(foe_zone, this.foes);
+
+        var death_zone = this.map.createLayer("deathZone", tileset, 0, 0);
+        death_zone.setCollisionBetween(1, this.width);
+        this.physics.add.collider(
+            death_zone,
+            this.player,
+            this.playerFall,
+            () => {
+                return true;
+            },
+            this
+        );
+
+        var spikes = this.map.createLayer("spikes", tileset, 0, 0);
+        spikes.setCollisionBetween(1, this.width);
+        this.physics.add.collider(
+            spikes,
+            this.player,
+            this.playerFall,
+            () => {
+                return true;
+            },
+            this
+        );
         
     }
 
@@ -245,6 +272,9 @@ export class LevelOne extends Phaser.Scene{
         gem.destroy();
     }
 
+    playerFall() {
+        this.player.playerDamaged();
+    }
 
     resetGame() {
         this.player.destroy();

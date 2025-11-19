@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setCollideWorldBounds(false);
+        this.body.setCollideWorldBounds(true);
         this.body.setCircle(12);
 
         //Status variables [subject to change]
@@ -110,19 +110,6 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.isStatic = false;
             this.body.setAllowGravity(true);
         }
-
-        //checks player fall, handles death
-        this.checkFall();
-    }
-
-    checkFall() {
-        if(this.y > 720 && this.lives > 0) {
-            // moves player back to closest platform
-            this.x = 0;
-            this.y = 250;
-
-            this.playerDamaged();
-        }
     }
 
     movePlayer(speed) {
@@ -139,8 +126,10 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     playerDamaged() {
-        //this.sound.play()
         this.lives--;
+
+        this.x = this.scene.playerStartX;
+        this.y = this.scene.playerStartY;
 
         this.scene.tweens.add({
             targets: this,

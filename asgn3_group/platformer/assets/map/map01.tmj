@@ -109,7 +109,7 @@
          "name":"foeZone",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":120,
          "x":0,
          "y":0
@@ -1079,23 +1079,6 @@
                  "y":80.75
                 }, 
                 {
-                 "height":337.818,
-                 "id":51,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"worldBound",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2.98954,
-                 "x":-0.747384,
-                 "y":30.6428
-                }, 
-                {
                  "ellipse":true,
                  "height":0,
                  "id":53,
@@ -1110,8 +1093,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":741.135697147427,
-                 "y":137.741046831956
+                 "x":741.136,
+                 "y":137.741
                 }, 
                 {
                  "ellipse":true,
@@ -1128,8 +1111,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":886.874611214787,
-                 "y":510.974851150804
+                 "x":886.875,
+                 "y":510.975
                 }, 
                 {
                  "ellipse":true,
@@ -1146,8 +1129,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1380.07642406469,
-                 "y":111.08148938061
+                 "x":1380.08,
+                 "y":111.081
                 }, 
                 {
                  "ellipse":true,
@@ -1164,8 +1147,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":472.762818803875,
-                 "y":417.666400071092
+                 "x":462.099177019461,
+                 "y":423.886563405314
                 }],
          "opacity":1,
          "type":"objectgroup",
