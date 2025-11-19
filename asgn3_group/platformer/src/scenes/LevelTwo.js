@@ -20,6 +20,7 @@ export class LevelTwo extends Phaser.Scene {
         this.map = this.add.tilemap('tilemap_2');
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
         this.map.createLayer("Background", 0, 0);
+        //this.map.createLayer("Ouch", 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
         this.player = new Player(this, 0, 200);
@@ -190,6 +191,8 @@ export class LevelTwo extends Phaser.Scene {
 
     playerFall() {
         this.player.playerDamaged();
+        this.player.playerReset();
+
     }
 
     resetGame() {
