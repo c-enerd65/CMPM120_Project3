@@ -52,14 +52,17 @@ export class LevelOne extends Phaser.Scene{
         this.foes.runChildUpdate = true;
 
         this.scoreText.text = `Score: ${this.player.score}`;
+        this.staminaText.text = `Stamina: ${this.player.stamina}`;
+        this.livesText.text = `Lives: ${this.player.lives}`;
+        
         //end state for player death
-        /*if(this.player.lives <= 0)
-        {
+        if(this.player.lives <= 0) {
             this.player.destroy();
+            this.sound.stopAll();
 
             this.scene.stop(this.scene);
             this.scene.start('End');
-        }*/
+        }
 
         //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
@@ -67,7 +70,7 @@ export class LevelOne extends Phaser.Scene{
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.TWO)) {
-            this.stopAudio('theme');
+            this.sound.stopAll();
             this.scene.switch('LevelTwo');
         }
     }
@@ -110,8 +113,24 @@ export class LevelOne extends Phaser.Scene{
     }
 
     levelCamera() {
-        this.scoreText = this.add.text(this.center_w, 20, `Score: ${this.player.score}`, {
-            fontSize: '24px',
+        this.scoreText = this.add.text(this.center_w - 150, 20, `Score: ${this.player.score}`, {
+            backgroundColor: '#000',
+            fontFamily: 'px',
+            fontSize: '16px',
+            fill: '#FFF' 
+        });
+
+        this.staminaText = this.add.text(this.center_w, 20, `Stamina: ${this.player.stamina}`, {
+            backgroundColor: '#000',
+            fontFamily: 'px',
+            fontSize: '16px',
+            fill: '#FFF' 
+        });
+
+        this.livesText = this.add.text(this.center_w + 150, 20, `Lives: ${this.player.lives}`, {
+            backgroundColor: '#000',
+            fontFamily: 'px',
+            fontSize: '16px',
             fill: '#FFF' 
         });
 
@@ -120,7 +139,7 @@ export class LevelOne extends Phaser.Scene{
         camera.startFollow(this.player, true, 0.5, 0.5, -200, 120);
         camera.setZoom(2, 2);
 
-        this.hud = this.add.container(this.player.x, this.player.y, [this.scoreText]);
+        this.hud = this.add.container(this.player.x, this.player.y - 50, [this.scoreText, this.staminaText, this.livesText]);
         this.hud.setScrollFactor(0);
     }
 
@@ -131,7 +150,11 @@ export class LevelOne extends Phaser.Scene{
             theme: this.sound.add('lvl1_theme'),
             run: this.sound.add('runBoost'),
             stamina: this.sound.add('staminaBoost'),
-            collect: this.sound.add('collectGem')
+            collect: this.sound.add('collectGem'),
+            collectKey: this.sound.add('collectKey'),
+            playerFall: this.sound.add('playerFall'),
+            playerHit: this.sound.add('playerHit'),
+            enemyHit: this.sound.add('enemyHit')
         };
     }
 
@@ -341,28 +364,34 @@ export class LevelOne extends Phaser.Scene{
     }
 
     getKey(key) {
+        this.playAudio('collectKey');
         this.player.hasKey = key.hasKey;
         key.destroy();
     }
 
     checkMoveNext() {
         if(this.player.hasKey) {
-            this.stopAudio('theme');
+            this.sound.stopAll();
             this.scene.switch('LevelTwo');
         }
     }
 
     playerFall() {
+        this.playAudio('playerFall');
         this.player.playerDamaged();
+        this.player.lives -= 1;
         this.player.playerReset();
     }
 
     playerHit(foe) {
+        this.playAudio('playerHit');
         this.player.playerDamaged();
+        this.player.lives -= foe.damage;
         foe.destroy();
     }
 
     destroyFoe(foe) {
+        this.playAudio('enemyHit');
         this.player.score += foe.points;
         this.player.bullets.sushiHit();
         foe.destroy();

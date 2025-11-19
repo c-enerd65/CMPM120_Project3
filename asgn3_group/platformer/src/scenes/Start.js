@@ -5,6 +5,7 @@ export class Start extends Phaser.Scene {
 
     preload() {
         //loads all of the assets in respective folders
+        this.loadFonts();
         this.loadGameImages(); //background, prompts, etcs.
         this.loadSpritesheets(); // player & foe sheets
         this.loadGameAudio(); //game audio
@@ -17,6 +18,10 @@ export class Start extends Phaser.Scene {
             this.scene.stop('Start');
             this.scene.start('LevelOne');
         //});
+    }
+
+    loadFonts() {
+        this.load.font('px', 'assets/fonts/FSEX302.ttf');
     }
 
     loadGameImages() {
@@ -52,6 +57,10 @@ export class Start extends Phaser.Scene {
         this.load.audio('runBoost', 'assets/sound/uplong.mp3');
         this.load.audio('staminaBoost', 'assets/sound/upshort.mp3');
         this.load.audio('collectGem', 'assets/sound/coin9.mp3');
+        this.load.audio('collectKey', 'assets/sound/keyGrab.mp3');
+        this.load.audio('playerFall', 'assets/sound/SoundFallDull.mp3');
+        this.load.audio('playerHit', 'assets/sound/SoundPlayerHit.mp3');
+        this.load.audio('enemyHit', 'assets/sound/SoundEnemyShot.mp3');
     }
 
     loadMaps() {

@@ -4,7 +4,7 @@ const PLAYER_STAMINA = 100;
 const PLAYER_VELOCITY = 200;
 const PLAYER_JUMP = -245;
 
-const TOTAL_LIVES = 3;
+const TOTAL_LIVES = 5;
 
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, name = 'player')
@@ -107,7 +107,8 @@ class Player extends Phaser.GameObjects.Sprite {
                     if(this.stamina < PLAYER_STAMINA) {
                         this.stamina += 1;
                     }
-                }, this);
+                }, this
+                );
             }
         }
         else {
@@ -143,8 +144,6 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     playerDamaged() {
-        this.lives--;
-
         this.scene.tweens.add({
             targets: this,
             duration: 750,
