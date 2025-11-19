@@ -120,7 +120,7 @@ export class LevelOne extends Phaser.Scene{
         camera.startFollow(this.player, true, 0.5, 0.5, -200, 120);
         camera.setZoom(2, 2);
 
-        this.hud = this.add.container(0, 0, [this.scoreText]);
+        this.hud = this.add.container(this.player.x, this.player.y, [this.scoreText]);
         this.hud.setScrollFactor(0);
     }
 
