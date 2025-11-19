@@ -27,7 +27,7 @@ export class LevelTwo extends Phaser.Scene {
         this.runTrail.start();
 
         this.generateBoosts();
-        this.generateMobs();
+        //this.generateMobs();
 
         this.mapCollisions(tileset);
         this.levelCamera();
@@ -65,14 +65,10 @@ export class LevelTwo extends Phaser.Scene {
     }
 
     mapCollisions(tileset) {
-        var ground = this.map.createLayer("ground", tileset, 0, 0);
+        var ground = this.map.createLayer("Base", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foe);
-
-        var grab = this.map.createLayer("grab", tileset, 0, 0);
-        grab.setCollisionBetween(1, this.width);
-        this.physics.add.collider(grab, this.player);
 
         var spike = this.map.createLayer("Ouch", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);

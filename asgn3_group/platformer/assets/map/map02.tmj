@@ -234,8 +234,17 @@
  "tileheight":16,
  "tilesets":[
         {
+         "columns":20,
          "firstgid":1,
-         "source":"..\/..\/..\/..\/Map Stuff\/Tiles_2\/monochrome_tilemap.tsx"
+         "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/kenney_1-bit-platformer-pack\/Tilemap\/monochrome_tilemap_packed.png",
+         "imageheight":320,
+         "imagewidth":320,
+         "margin":0,
+         "name":"monochromeTilemap",
+         "spacing":0,
+         "tilecount":400,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",
