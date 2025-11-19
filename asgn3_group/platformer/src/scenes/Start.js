@@ -20,7 +20,7 @@ export class Start extends Phaser.Scene {
         //allows any key press to move to next scene
         //this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
-            this.scene.start('LevelOne');
+            this.scene.start('LevelTwo');
         //});
     }
 
