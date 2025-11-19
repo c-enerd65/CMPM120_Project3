@@ -19,9 +19,10 @@ export class LevelOne extends Phaser.Scene{
         //add tilemap
         this.map = this.add.tilemap('tilemap_1');
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
+        this.map.createLayer("background", tileset, 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 25, 250);
+        this.player = new Player(this, 15, 230);
 
         this.initParticles();
         this.runTrail.stop();
@@ -72,10 +73,10 @@ export class LevelOne extends Phaser.Scene{
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foe);
 
-        var grab = this.map.createLayer("grab", tileset, 0, 0);
-        grab.setCollisionBetween(1, this.width);
-        this.physics.add.collider(grab, this.player);
-        this.physics.add.collider(grab, this.foe);
+        this.map.createLayer("over", tileset, 0, 0);
+        this.map.createLayer("deathZone", tileset, 0, 0);
+        this.map.createLayer("spikes", tileset, 0, 0);
+        
     }
 
     levelCamera() {
