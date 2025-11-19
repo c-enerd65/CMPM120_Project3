@@ -32,6 +32,8 @@ class Player extends Phaser.GameObjects.Sprite {
 
         this.bullets = new PlayerShot(this.scene);
 
+        this.hasKey = false;
+
         //init animations
         this.init();
 

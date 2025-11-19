@@ -33,6 +33,7 @@ export class LevelOne extends Phaser.Scene{
         this.generateBoosts();
         this.generateGems();
         this.generateMobs();
+        this.generateWinCon();
 
         this.mapCollisions(tileset);
         this.levelCamera();
@@ -216,8 +217,26 @@ export class LevelOne extends Phaser.Scene{
         }
     }
 
+    generateWinCon() {
+        this.levelKey = this.add.group('key');
+        this.levelBlock = this.add.group('wall');
+        let object = this.map.getObjectLayer('collect');
+
+        for(var obj of object.objects) {
+            if(obj.properties[0].name == 'key') {
+                let key = this.physics.add.staticImage(obj.x, obj.y, 'key');
+                key.hasKey = obj.properties[0].value;
+                this.levelKey.add(key);
+            }
+            else if(obj.properties[0].name == 'door') {
+                let door = this.physics.add.staticSprite(obj.x, obj.y, 'wall');
+                this.levelBlock.add(door);
+            }
+        }
+    }
+
     levelCollisions() {
-        this.physics.add.collider(
+        this.physics.add.overlap(
             this.availBoost,
             this.player,
             this.playerBoost,
@@ -227,7 +246,7 @@ export class LevelOne extends Phaser.Scene{
             this
         );
 
-        this.physics.add.collider(
+        this.physics.add.overlap(
             this.gems,
             this.player,
             this.collectGem,
@@ -235,7 +254,27 @@ export class LevelOne extends Phaser.Scene{
                 return true;
             },
             this
-        )
+        );
+
+        this.physics.add.collider(
+            this.levelKey,
+            this.player,
+            this.getKey,
+            () => {
+                return true;
+            },
+            this
+        );
+
+        this.physics.add.overlap(
+            this.levelBlock,
+            this.player,
+            this.checkMoveNext,
+            () => {
+                return true;
+            },
+            this
+        );
 
         this.physics.add.collider(
             this.foes,
@@ -245,7 +284,7 @@ export class LevelOne extends Phaser.Scene{
                 return true;
             },
             this
-        )
+        );
 
         this.physics.add.collider(
             this.foes,
@@ -291,6 +330,18 @@ export class LevelOne extends Phaser.Scene{
         this.player.score += gem.value;
         this.playAudio('collect');
         gem.destroy();
+    }
+
+    getKey(key) {
+        this.player.hasKey = key.hasKey;
+        key.destroy();
+    }
+
+    checkMoveNext() {
+        if(this.player.hasKey) {
+            this.scene.stop(this);
+            this.scene.start('LevelTwo');
+        }
     }
 
     playerFall() {
