@@ -28,6 +28,7 @@ export class LevelOne extends Phaser.Scene{
         this.runTrail.stop();
 
         this.generateBoosts();
+        this.generateGems();
         this.generateMobs();
 
         this.mapCollisions(tileset);
@@ -44,7 +45,7 @@ export class LevelOne extends Phaser.Scene{
 
     update() {
         this.player.update();
-        this.foe.update();
+        this.foes.runChildUpdate = true;
         
         //end state for player death
         /*if(this.player.lives <= 0)
@@ -71,7 +72,7 @@ export class LevelOne extends Phaser.Scene{
         var ground = this.map.createLayer("ground", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
         this.physics.add.collider(ground, this.player);
-        this.physics.add.collider(ground, this.foe);
+        this.physics.add.collider(ground, this.foes);
 
         this.map.createLayer("over", tileset, 0, 0);
         this.map.createLayer("deathZone", tileset, 0, 0);
@@ -91,14 +92,27 @@ export class LevelOne extends Phaser.Scene{
             jump: this.sound.add('jump'),
             theme: this.sound.add('lvl1_theme'),
             run: this.sound.add('runBoost'),
-            stamina: this.sound.add('staminaBoost')
+            stamina: this.sound.add('staminaBoost'),
+            collect: this.sound.add('collectGem')
         };
     }
 
     playAudio(key) {
-        if(key === 'theme' || key === 'run') {
+        if(key === 'theme') {
             this.audioFiles[key].play({
-                loop: true
+                loop: true,
+                volume: 0.5
+            });
+        }
+        else if(key === 'run') {
+            this.audioFiles[key].play({
+                loop: true,
+                volume: 1.5
+            });
+        }
+        else if(key === 'stamina') {
+            this.audioFiles[key].play({
+                volume: 2.5
             });
         }
         else {
@@ -137,22 +151,40 @@ export class LevelOne extends Phaser.Scene{
 
     generateBoosts() {
         this.availBoost = this.add.group();
+        let object = this.map.getObjectLayer('collect');
 
-        const bSpawn = {
-            x: [50, 150],
-            y: [350, 310]
-        }
-
-        for(let i = 0; i < bSpawn.x.length; i++) {
-            let rand = Math.ceil(Math.random() * 2)
-            let boost = new Boost(this, bSpawn.x[i], bSpawn.y[i], `boost_${rand}`);
-
-            this.availBoost.add(boost);
+        for(var obj of object.objects) {
+            if(obj.properties[0].name == 'boost') {
+                let boost = new Boost(this, obj.x, obj.y, obj.properties[0].value);
+                this.availBoost.add(boost);
+            }
         }
     }
 
+    generateGems() {
+        this.gems = this.add.group('gem');
+        let object = this.map.getObjectLayer('collect');
+
+        for(var obj of object.objects) {
+            if(obj.properties[0].name == 'value') {
+                let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
+                gem.value = obj.properties[0].value;
+                this.gems.add(gem);
+            }
+        }
+
+    }
+
     generateMobs() {
-        this.foe = new Foe(this, 550, 350, 'lvl2_foe');
+        this.foes = this.add.group();
+        let object = this.map.getObjectLayer('collect');
+
+        for(var obj of object.objects) {
+            if(obj.properties[0].name == 'enemy') {
+                let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
+                this.foes.add(foe);
+            }
+        }
     }
 
     levelCollisions() {
@@ -165,6 +197,16 @@ export class LevelOne extends Phaser.Scene{
             },
             this
         );
+
+        this.physics.add.collider(
+            this.gems,
+            this.player,
+            this.collectGem,
+            () => {
+                return true;
+            },
+            this
+        )
 
     }
 
@@ -196,6 +238,13 @@ export class LevelOne extends Phaser.Scene{
 
         boost.destroy();
     }
+
+    collectGem(gem) {
+        this.player.score += gem.value;
+        this.playAudio('collect');
+        gem.destroy();
+    }
+
 
     resetGame() {
         this.player.destroy();
