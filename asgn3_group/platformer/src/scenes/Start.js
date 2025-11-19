@@ -13,23 +13,16 @@ export class Start extends Phaser.Scene {
     }
 
     create() {
-        this.background = this.add.sprite(-25, -75, 'background')
-        .setOrigin(0, 0)
-        .setScale(1.25);
 
-        this.alien = this.add.sprite(175, 125, 'player')
-        .setScale(3);
-
-        this.titleText = this.add.text(175,340, 'Space    Runner', { 
-            fontFamily: 'px',
-            fontSize: '32px', 
-            fill: '#FFF' });
+        this.loadStartScreen();
+        this.createStartButtons();
+        this.startButtonAction();
 
         //allows any key press to move to next scene
-        this.input.keyboard.on('keydown', () => {
+        /*this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
             this.scene.start('LevelOne');
-        });
+        });*/
     }
 
     loadFonts() {
@@ -38,6 +31,7 @@ export class Start extends Phaser.Scene {
 
     loadGameImages() {
         this.load.image('background', 'assets/background.png');
+        this.load.image('playButton', 'assets/playButton.png')
         this.load.image('boost_1', 'assets/sprites/boost_1.png');
         this.load.image('boost_2', 'assets/sprites/boost_2.png');
         this.load.image('key', 'assets/sprites/key.png');
@@ -79,5 +73,100 @@ export class Start extends Phaser.Scene {
         this.load.image('monoTiles', 'assets/map/monochrome_tilemap_packed.png');
         this.load.tilemapTiledJSON('tilemap_1', 'assets/map/map01.tmj');
         this.load.tilemapTiledJSON('tilemap_2', 'assets/map/map02.tmj');
+    }
+
+    loadStartScreen() {
+        this.background = this.add.sprite(-25, -75, 'background')
+        .setOrigin(0)
+        .setScale(1.25);
+
+        this.alien = this.add.sprite(305, 162, 'player')
+        .setScale(1.75);
+
+        this.donut = this.add.sprite(285, 355, 'boost_1')
+        .setScale(1.75);
+
+        this.titleText = this.add.text(175,340, 'Space    Runner', { 
+            fontFamily: 'px',
+            fontSize: '32px', 
+            fill: '#FFF' 
+        });
+    }
+
+    createStartButtons() {
+        this.playG = this.add.sprite(0, 0, 'playButton')
+        .setOrigin(0)
+        .setScale(1.5);
+        this.playGText = this.add.text(95, 15, 'Start', { 
+            fontFamily: 'px',
+            fontSize: '36px', 
+            fill: '#000' 
+        });
+
+        this.startG = this.add.container(850, 215, [this.playG, this.playGText])
+        .setSize(192, 48);
+
+        this.playOne = this.add.sprite(0, 0, 'playButton')
+        .setOrigin(0)
+        .setScale(1.5);
+        this.playOneText = this.add.text(45, 10, 'Start Level One\n\t\t - Cienna -', { 
+            fontFamily: 'px',
+            fontSize: '24px', 
+            fill: '#000' 
+        });
+
+        this.startOne = this.add.container(850, 320, [this.playOne, this.playOneText])
+        .setSize(192, 48);
+
+        this.playTwo = this.add.sprite(0, 0, 'playButton')
+        .setOrigin(0)
+        .setScale(1.5);
+        this.playTwoText = this.add.text(45, 10, 'Start Level Two\n\t\t - Saira -', { 
+            fontFamily: 'px',
+            fontSize: '24px', 
+            fill: '#000' 
+        });
+
+        this.startTwo = this.add.container(850, 425, [this.playTwo, this.playTwoText])
+        .setSize(192, 48);
+    }
+
+    startButtonAction() {
+        this.startG.setInteractive();
+        this.startOne.setInteractive();
+        this.startTwo.setInteractive();
+
+        this.startG.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.startG,
+                scale: 1.15,
+                ease: 'Linear',
+                duration: 1000,
+                yoyo: true,
+                repeat: 0
+            });
+        });
+
+        this.startOne.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.startOne,
+                scale: 1.15,
+                ease: 'Linear',
+                duration: 1000,
+                yoyo: true,
+                repeat: 0
+            });
+        });
+
+        this.startTwo.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.startTwo,
+                scale: 1.15,
+                ease: 'Linear',
+                duration: 1000,
+                yoyo: true,
+                repeat: 0
+            });
+        });
     }
 }
