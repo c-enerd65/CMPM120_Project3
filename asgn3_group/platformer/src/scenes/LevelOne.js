@@ -237,6 +237,15 @@ export class LevelOne extends Phaser.Scene{
             this
         )
 
+        this.physics.add.collider(
+            this.foes,
+            this.player,
+            this.playerHit,
+            () => {
+                return true;
+            },
+            this
+        )
     }
 
     playerBoost(boost) {
