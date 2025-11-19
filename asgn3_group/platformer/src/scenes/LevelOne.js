@@ -50,7 +50,8 @@ export class LevelOne extends Phaser.Scene{
     update() {
         this.player.update();
         this.foes.runChildUpdate = true;
-        
+
+        this.scoreText.text = `Score: ${this.player.score}`;
         //end state for player death
         /*if(this.player.lives <= 0)
         {
@@ -66,9 +67,8 @@ export class LevelOne extends Phaser.Scene{
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.TWO)) {
-            this.scene.stop(this);
             this.stopAudio('theme');
-            this.scene.start('LevelTwo');
+            this.scene.switch('LevelTwo');
         }
     }
 
@@ -110,10 +110,18 @@ export class LevelOne extends Phaser.Scene{
     }
 
     levelCamera() {
+        this.scoreText = this.add.text(this.center_w, 20, `Score: ${this.player.score}`, {
+            fontSize: '24px',
+            fill: '#FFF' 
+        });
+
         //playing around with the camera settings [subject to change]
-        this.playerCam = this.cameras.main.setBounds(0, 0, this.width, this.height); //creates camera var
-        this.playerCam.startFollow(this.player, true, 0.5, 0.5, -200, 120); //sets camera to follow player
-        this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
+        let camera = this.cameras.main.setBounds(0, 0, this.width, this.height, true); //creates camera var
+        camera.startFollow(this.player, true, 0.5, 0.5, -200, 120);
+        camera.setZoom(2, 2);
+
+        this.hud = this.add.container(0, 0, [this.scoreText]);
+        this.hud.setScrollFactor(0);
     }
 
     loadAudio() {
@@ -339,8 +347,8 @@ export class LevelOne extends Phaser.Scene{
 
     checkMoveNext() {
         if(this.player.hasKey) {
-            this.scene.stop(this);
-            this.scene.start('LevelTwo');
+            this.stopAudio('theme');
+            this.scene.switch('LevelTwo');
         }
     }
 
