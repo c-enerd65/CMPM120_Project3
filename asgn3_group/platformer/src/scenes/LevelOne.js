@@ -19,12 +19,13 @@ export class LevelOne extends Phaser.Scene{
         //add tilemap
         this.map = this.add.tilemap('tilemap_1');
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
+        this.map.createLayer("background", tileset, 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 250);
+        this.player = new Player(this, 15, 230);
 
         this.initParticles();
-        this.runTrail.start();
+        this.runTrail.stop();
 
         this.generateBoosts();
         this.generateMobs();
@@ -43,6 +44,7 @@ export class LevelOne extends Phaser.Scene{
 
     update() {
         this.player.update();
+        this.foe.update();
         
         //end state for player death
         /*if(this.player.lives <= 0)
@@ -71,9 +73,10 @@ export class LevelOne extends Phaser.Scene{
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foe);
 
-        var grab = this.map.createLayer("grab", tileset, 0, 0);
-        grab.setCollisionBetween(1, this.width);
-        this.physics.add.collider(grab, this.player);
+        this.map.createLayer("over", tileset, 0, 0);
+        this.map.createLayer("deathZone", tileset, 0, 0);
+        this.map.createLayer("spikes", tileset, 0, 0);
+        
     }
 
     levelCamera() {
@@ -86,12 +89,21 @@ export class LevelOne extends Phaser.Scene{
     loadAudio() {
         this.audioFiles = {
             jump: this.sound.add('jump'),
-            theme: this.sound.add('lvl1_theme')
+            theme: this.sound.add('lvl1_theme'),
+            run: this.sound.add('runBoost'),
+            stamina: this.sound.add('staminaBoost')
         };
     }
 
     playAudio(key) {
-        this.audioFiles[key].play();
+        if(key === 'theme' || key === 'run') {
+            this.audioFiles[key].play({
+                loop: true
+            });
+        }
+        else {
+            this.audioFiles[key].play();
+        }
     }
 
     stopAudio(key) {
@@ -99,27 +111,27 @@ export class LevelOne extends Phaser.Scene{
     }
 
     initParticles() {
-        this.runTrail = this.add.particles(this.player.x, this.player.y, 'star_1', {
-            quantity: 100,
-            accelerationX: 1000,
+        this.runTrail = this.add.particles(-8, 8, 'star', {
+            quantity: 10,
+            accelerationX: -500,
+            accelerationY:  -200,
             speedY: {
-                min: 20,
-                max: 20
+                min: 10,
+                max: 80
             },
             speedX: {
-                min: 30,
-                max: 70
+                min: 10,
+                max: 150
             },
             scale: {
-                start: 0.1,
-                end: 0.01,
+                start: 0.06,
+                end: 0.004,
                 random: true
             },
             blendMode: 'ADD',
-            frequency: -1,
+            frequency: 100,
             follow: this.player,
-            followOffest: {},
-            tint: 0xffadd2 
+            tint: 0xBAE2FF 
         });
     }
 
@@ -140,16 +152,7 @@ export class LevelOne extends Phaser.Scene{
     }
 
     generateMobs() {
-        const foePath = () => {
-            this.path = new Phaser.Curves.Path(550, 400);
-            this.path.lineTo(650, 400);
-            this.graphics = this.add.graphics();
-        }
-
-        foePath()
-        this.path.draw(this.graphics);
-
-        this.foe = new Foe(this, this.path, 550, 340);
+        this.foe = new Foe(this, 550, 350, 'lvl2_foe');
     }
 
     levelCollisions() {
@@ -166,21 +169,26 @@ export class LevelOne extends Phaser.Scene{
     }
 
     playerBoost(boost) {
-        //this.sound.play();
-
         switch(boost.type) {
             case 'stamina':
                 this.player.stamina += boost.modifier;
+                this.player.tint = 0xA8E477;
+                this.playAudio('stamina');
+                this.time.delayedCall(275, () => {
+                    this.player.tint = 0xFFFFFF;
+                })
                 break;
             case 'speed':
                 this.player.boost = boost.modifier;
                 this.runTrail.start();
+                this.playAudio('run');
                 this.tweens.add({
                     targets: [this.player],
-                    completeDelay: 1500, //duration flexible
+                    completeDelay: 3750,
                     onComplete: () => {
                         this.player.boost = 1;
                         this.runTrail.stop();
+                        this.stopAudio('run');
                     }                     
                 });
                 break;
@@ -193,6 +201,7 @@ export class LevelOne extends Phaser.Scene{
         this.player.destroy();
 
         this.scene.stop(this.scene);
+        this.stopAudio('theme');
         this.scene.start('LevelOne');
     }
 }

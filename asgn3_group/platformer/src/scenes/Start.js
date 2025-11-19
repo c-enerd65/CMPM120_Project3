@@ -29,9 +29,11 @@ export class Start extends Phaser.Scene {
         this.load.image('score', 'assets/scoreBar.png');
         this.load.image('startScreen', 'assets/startScreen.png');
         this.load.image('startPrompt', 'assets/pAB_logo.png');
-        this.load.image('boost_1', 'assets/sprites/donut_1.png');
-        this.load.image('boost_2', 'assets/sprites/donut_2.png');
-        this.load.image('star_1', 'assets/particles/star_07.png');
+        this.load.image('boost_1', 'assets/sprites/boost_1.png');
+        this.load.image('boost_2', 'assets/sprites/boost_2.png');
+        this.load.image('key', 'assets/sprites/key.png');
+        this.load.image('gem', 'assets/sprites/gem.png');
+        this.load.image('star', 'assets/particles/star_07.png');
     }
 
     loadSpritesheets() {
@@ -53,6 +55,8 @@ export class Start extends Phaser.Scene {
         this.load.audio('laser', 'assets/sound/laserRetro_001.ogg');
         this.load.audio('jump', 'assets/sound/slime_jump.mp3');
         this.load.audio('lvl1_theme', 'assets/sound/SpaceTheme.mp3');
+        this.load.audio('runBoost', 'assets/sound/uplong.mp3');
+        this.load.audio('staminaBoost', 'assets/sound/upshort.mp3');
     }
 
     loadMaps() {
