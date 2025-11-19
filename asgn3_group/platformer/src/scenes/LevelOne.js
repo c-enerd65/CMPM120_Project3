@@ -395,7 +395,7 @@ export class LevelOne extends Phaser.Scene{
     destroyFoe(foe) {
         this.playAudio('enemyHit');
         this.player.score += foe.points;
-        if(this.player.bullets){
+        if(this.player.bullets != undefined){
             this.player.bullets.sushiHit();
         }
         foe.destroy();
