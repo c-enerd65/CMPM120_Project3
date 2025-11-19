@@ -58,6 +58,8 @@ export class Start extends Phaser.Scene {
 
     loadGameAudio() {
         this.load.audio('laser', 'assets/sound/laserRetro_001.ogg');
+        this.load.audio('select', 'assets/sound/vgmenuselect.ogg');
+        this.load.audio('startTheme', 'assets/sound/crazy-space.ogg');
         this.load.audio('jump', 'assets/sound/slime_jump.mp3');
         this.load.audio('lvl1_theme', 'assets/sound/SpaceTheme.mp3');
         this.load.audio('runBoost', 'assets/sound/uplong.mp3');
@@ -91,6 +93,11 @@ export class Start extends Phaser.Scene {
             fontSize: '32px', 
             fill: '#FFF' 
         });
+
+        this.sound.play('startTheme', {
+            loop: true,
+            volume: 0.5
+        })
     }
 
     createStartButtons() {
@@ -147,6 +154,16 @@ export class Start extends Phaser.Scene {
             });
         });
 
+        this.startG.on('pointerdown', () => {
+            this.sound.play('select');
+
+            this.time.delayedCall(275, () => {
+                this.sound.stopAll();
+                this.scene.stop(this);
+                this.scene.start('LevelOne');
+            });
+        });
+
         this.startOne.on('pointerover', () => {
             this.tweens.add({
                 targets: this.startOne,
@@ -158,6 +175,16 @@ export class Start extends Phaser.Scene {
             });
         });
 
+        this.startOne.on('pointerdown', () => {
+            this.sound.play('select');
+
+            this.time.delayedCall(275, () => {
+                this.sound.stopAll();
+                this.scene.stop(this);
+                this.scene.start('LevelOne');
+            });
+        });
+
         this.startTwo.on('pointerover', () => {
             this.tweens.add({
                 targets: this.startTwo,
@@ -166,6 +193,16 @@ export class Start extends Phaser.Scene {
                 duration: 1000,
                 yoyo: true,
                 repeat: 0
+            });
+        });
+
+        this.startTwo.on('pointerdown', () => {
+            this.sound.play('select');
+
+            this.time.delayedCall(275, () => {
+                this.sound.stopAll();
+                this.scene.stop(this);
+                this.scene.start('LevelTwo');
             });
         });
     }

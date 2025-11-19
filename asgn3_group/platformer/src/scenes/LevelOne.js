@@ -338,7 +338,7 @@ export class LevelOne extends Phaser.Scene{
                 this.playAudio('stamina');
                 this.time.delayedCall(275, () => {
                     this.player.tint = 0xFFFFFF;
-                })
+                });
                 break;
             case 'speed':
                 this.player.boost = boost.modifier;
