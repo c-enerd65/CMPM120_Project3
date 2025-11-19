@@ -1,6 +1,6 @@
 const PLAYER_STAMINA = 100;
 const PLAYER_VELOCITY = 200;
-const PLAYER_JUMP = -225;
+const PLAYER_JUMP = -245;
 
 const TOTAL_LIVES = 3;
 
@@ -128,9 +128,6 @@ class Player extends Phaser.GameObjects.Sprite {
     playerDamaged() {
         this.lives--;
 
-        this.x = this.scene.playerStartX;
-        this.y = this.scene.playerStartY;
-
         this.scene.tweens.add({
             targets: this,
             duration: 750,
@@ -140,6 +137,11 @@ class Player extends Phaser.GameObjects.Sprite {
             },
             repeat: 4
         });
+    }
+
+    playerReset() {
+        this.x = this.scene.playerStartX;
+        this.y = this.scene.playerStartY;
     }
 
     grabWall() {

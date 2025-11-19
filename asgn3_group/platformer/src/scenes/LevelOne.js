@@ -80,6 +80,7 @@ export class LevelOne extends Phaser.Scene{
         var foe_zone = this.map.createLayer("foeZone", tileset, 0, 0);
         foe_zone.setCollisionBetween(1, this.width);
         this.physics.add.collider(foe_zone, this.foes);
+        foe_zone.setVisible(false);
 
         var death_zone = this.map.createLayer("deathZone", tileset, 0, 0);
         death_zone.setCollisionBetween(1, this.width);
@@ -116,6 +117,7 @@ export class LevelOne extends Phaser.Scene{
 
     loadAudio() {
         this.audioFiles = {
+            laser: this.sound.add('laser'),
             jump: this.sound.add('jump'),
             theme: this.sound.add('lvl1_theme'),
             run: this.sound.add('runBoost'),
@@ -274,6 +276,12 @@ export class LevelOne extends Phaser.Scene{
 
     playerFall() {
         this.player.playerDamaged();
+        this.player.playerReset();
+    }
+
+    playerHit(foe) {
+        this.player.playerDamaged();
+        foe.destroy();
     }
 
     resetGame() {
