@@ -73,6 +73,16 @@ export class LevelTwo extends Phaser.Scene{
         var grab = this.map.createLayer("grab", tileset, 0, 0);
         grab.setCollisionBetween(1, this.width);
         this.physics.add.collider(grab, this.player);
+
+        var spike = this.map.createLayer("Ouch", tileset, 0, 0);
+        ground.setCollisionBetween(1, this.width);
+        this.physics.add.collider(spike, this.player);
+        this.physics.add.collider(spike, this.foe);
+        this.physics.add.sprite(spike);
+       // if() {
+        //this.playerDamaged;    
+        //}
+
     }
 
     levelCamera() {
