@@ -13,11 +13,23 @@ export class Start extends Phaser.Scene {
     }
 
     create() {
+        this.background = this.add.sprite(-25, -75, 'background')
+        .setOrigin(0, 0)
+        .setScale(1.25);
+
+        this.alien = this.add.sprite(175, 125, 'player')
+        .setScale(3);
+
+        this.titleText = this.add.text(175,340, 'Space    Runner', { 
+            fontFamily: 'px',
+            fontSize: '32px', 
+            fill: '#FFF' });
+
         //allows any key press to move to next scene
-        //this.input.keyboard.on('keydown', () => {
+        this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
             this.scene.start('LevelOne');
-        //});
+        });
     }
 
     loadFonts() {
@@ -25,7 +37,7 @@ export class Start extends Phaser.Scene {
     }
 
     loadGameImages() {
-        this.load.image('startPrompt', 'assets/pAB_logo.png');
+        this.load.image('background', 'assets/background.png');
         this.load.image('boost_1', 'assets/sprites/boost_1.png');
         this.load.image('boost_2', 'assets/sprites/boost_2.png');
         this.load.image('key', 'assets/sprites/key.png');

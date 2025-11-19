@@ -264,6 +264,8 @@ export class LevelOne extends Phaser.Scene{
                 this.levelBlock.add(door);
             }
         }
+
+        this.levelBlock.setVisible(false);
     }
 
     levelCollisions() {
