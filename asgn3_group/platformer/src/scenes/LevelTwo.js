@@ -2,7 +2,7 @@ import Player from '../gameObjects/player.js';
 import Boost from '../gameObjects/boost.js';
 import Foe from '../gameObjects/foe.js';
 
-export class LevelTwo extends Phaser.Scene{
+export class LevelTwo extends Phaser.Scene {
     constructor() {
         super('LevelTwo');
     }  
@@ -73,6 +73,18 @@ export class LevelTwo extends Phaser.Scene{
         var grab = this.map.createLayer("grab", tileset, 0, 0);
         grab.setCollisionBetween(1, this.width);
         this.physics.add.collider(grab, this.player);
+
+        var spike = this.map.createLayer("Ouch", tileset, 0, 0);
+        ground.setCollisionBetween(1, this.width);
+        this.physics.add.collider(
+            spike, 
+            this.player, 
+            this.playerFall, 
+            () => {
+                return true;
+            },
+            this
+        );
     }
 
     levelCamera() {
@@ -186,6 +198,10 @@ export class LevelTwo extends Phaser.Scene{
         }
 
         boost.destroy();
+    }
+
+    playerFall() {
+        this.player.playerDamaged();
     }
 
     resetGame() {

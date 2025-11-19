@@ -20,7 +20,7 @@ export class Start extends Phaser.Scene {
         //allows any key press to move to next scene
         //this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
-            this.scene.start('LevelOne');
+            this.scene.start('LevelTwo');
         //});
     }
 
@@ -63,6 +63,6 @@ export class Start extends Phaser.Scene {
     loadMaps() {
         this.load.image('monoTiles', 'assets/map/monochrome_tilemap_packed.png');
         this.load.tilemapTiledJSON('tilemap_1', 'assets/map/map01.tmj');
-        this.load.tilemapTiledJSON('tilemap_2', 'assets/map/LevelTwoMapDesign1.tmj');
+        this.load.tilemapTiledJSON('tilemap_2', 'assets/map/map02.tmj');
     }
 }
