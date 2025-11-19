@@ -1,3 +1,5 @@
+import PlayerShot from './playerShot.js';
+
 const PLAYER_STAMINA = 100;
 const PLAYER_VELOCITY = 200;
 const PLAYER_JUMP = -245;
@@ -27,6 +29,8 @@ class Player extends Phaser.GameObjects.Sprite {
         
         this.speed = PLAYER_VELOCITY;
         this.boost = 1;
+
+        this.bullets = new PlayerShot(this.scene);
 
         //init animations
         this.init();
@@ -77,8 +81,6 @@ class Player extends Phaser.GameObjects.Sprite {
             }
         }, this);
 
-        //space bar for something??????
-        //from prev iteration could recycle for something lul
         this.SPACE = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
@@ -110,19 +112,32 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.isStatic = false;
             this.body.setAllowGravity(true);
         }
+
+        if(Phaser.Input.Keyboard.JustDown(this.SPACE)) {
+            this.shoot();
+        }
     }
 
     movePlayer(speed) {
         if(this.keyIn.left.isDown) {
+            this.bullets.setVelocityX(-750);
             this.body.setVelocityX(-speed);
             this.anims.play('walk', true);
-        } else if(this.keyIn.right.isDown) {
+        } 
+        else if(this.keyIn.right.isDown) {
+            this.bullets.setVelocityX(750);
             this.body.setVelocityX(speed);
             this.anims.play('walk', true);
-        } else {
+        } 
+        else {
+            this.bullets.setVelocityX(750);
             this.body.setVelocityX(0);
             this.anims.play('idle');
         }
+    }
+
+    shoot() {
+        this.bullets.shootSushi(this.x, this.y);
     }
 
     playerDamaged() {

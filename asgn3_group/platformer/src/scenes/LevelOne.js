@@ -246,6 +246,16 @@ export class LevelOne extends Phaser.Scene{
             },
             this
         )
+
+        this.physics.add.collider(
+            this.foes,
+            this.player.bullets,
+            this.destroyFoe,
+            () => {
+                return true;
+            },
+            this
+        );
     }
 
     playerBoost(boost) {
@@ -290,6 +300,12 @@ export class LevelOne extends Phaser.Scene{
 
     playerHit(foe) {
         this.player.playerDamaged();
+        foe.destroy();
+    }
+
+    destroyFoe(foe) {
+        this.player.score += foe.points;
+        this.player.bullets.sushiHit();
         foe.destroy();
     }
 
