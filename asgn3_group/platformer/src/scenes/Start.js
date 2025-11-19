@@ -12,22 +12,14 @@ export class Start extends Phaser.Scene {
     }
 
     create() {
-        //change all - Start Screen Images
-        this.background = this.add.sprite(640, 360, 'startScreen').setScale(3);
-        this.promptPlay = this.add.sprite(640, 540, 'startPrompt');
-        this.alien = this.add.sprite(640, 280, 'player').setScale(10);
-       
         //allows any key press to move to next scene
         //this.input.keyboard.on('keydown', () => {
             this.scene.stop('Start');
-            this.scene.start('LevelTwo');
+            this.scene.start('LevelOne');
         //});
     }
 
     loadGameImages() {
-        this.load.image('background', 'assets/gameMap.png');
-        this.load.image('score', 'assets/scoreBar.png');
-        this.load.image('startScreen', 'assets/startScreen.png');
         this.load.image('startPrompt', 'assets/pAB_logo.png');
         this.load.image('boost_1', 'assets/sprites/boost_1.png');
         this.load.image('boost_2', 'assets/sprites/boost_2.png');
