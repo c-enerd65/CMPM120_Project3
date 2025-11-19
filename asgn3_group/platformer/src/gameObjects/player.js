@@ -1,8 +1,10 @@
+import PlayerShot from './playerShot.js';
+
 const PLAYER_STAMINA = 100;
 const PLAYER_VELOCITY = 200;
 const PLAYER_JUMP = -245;
 
-const TOTAL_LIVES = 3;
+const TOTAL_LIVES = 5;
 
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, name = 'player')
@@ -27,6 +29,10 @@ class Player extends Phaser.GameObjects.Sprite {
         
         this.speed = PLAYER_VELOCITY;
         this.boost = 1;
+
+        this.bullets = new PlayerShot(this.scene);
+
+        this.hasKey = false;
 
         //init animations
         this.init();
@@ -77,8 +83,6 @@ class Player extends Phaser.GameObjects.Sprite {
             }
         }, this);
 
-        //space bar for something??????
-        //from prev iteration could recycle for something lul
         this.SPACE = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
@@ -103,31 +107,43 @@ class Player extends Phaser.GameObjects.Sprite {
                     if(this.stamina < PLAYER_STAMINA) {
                         this.stamina += 1;
                     }
-                }, this);
+                }, this
+                );
             }
         }
         else {
             this.body.isStatic = false;
             this.body.setAllowGravity(true);
         }
+
+        if(Phaser.Input.Keyboard.JustDown(this.SPACE)) {
+            this.shoot();
+        }
     }
 
     movePlayer(speed) {
         if(this.keyIn.left.isDown) {
+            this.bullets.setVelocityX(-750);
             this.body.setVelocityX(-speed);
             this.anims.play('walk', true);
-        } else if(this.keyIn.right.isDown) {
+        } 
+        else if(this.keyIn.right.isDown) {
+            this.bullets.setVelocityX(750);
             this.body.setVelocityX(speed);
             this.anims.play('walk', true);
-        } else {
+        } 
+        else {
+            this.bullets.setVelocityX(750);
             this.body.setVelocityX(0);
             this.anims.play('idle');
         }
     }
 
-    playerDamaged() {
-        this.lives--;
+    shoot() {
+        this.bullets.shootSushi(this.x, this.y);
+    }
 
+    playerDamaged() {
         this.scene.tweens.add({
             targets: this,
             duration: 750,

@@ -1,15 +1,15 @@
 const FOE_TYPE = {
     lvl1_foe: {
         damage: 1,
-        points: 5
+        points: 100
     },
     lvl2_foe: {
         damage: 1,
-        points: 10
+        points: 200
     },
     lvl3_foe: {
         damage: 2,
-        points: 15
+        points: 300
     }
 }
 

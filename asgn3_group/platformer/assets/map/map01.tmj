@@ -53,7 +53,7 @@
          "name":"background",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":120,
          "x":0,
          "y":0
@@ -554,8 +554,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1328,
-                 "y":103.5
+                 "x":1377,
+                 "y":95
                 }, 
                 {
                  "ellipse":true,
@@ -572,8 +572,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1328,
-                 "y":75.9122
+                 "x":1377,
+                 "y":56.5
                 }, 
                 {
                  "ellipse":true,
@@ -590,8 +590,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1328,
-                 "y":46.5268
+                 "x":1279.5,
+                 "y":56.5
                 }, 
                 {
                  "ellipse":true,
@@ -608,8 +608,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1328,
-                 "y":17
+                 "x":1279.5,
+                 "y":95
                 }, 
                 {
                  "ellipse":true,
@@ -1062,21 +1062,21 @@
                  "y":183.5
                 }, 
                 {
-                 "height":111.379,
+                 "height":15.8721,
                  "id":50,
                  "name":"",
                  "properties":[
                         {
-                         "name":"key",
+                         "name":"door",
                          "type":"bool",
                          "value":false
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":16.2428,
-                 "x":1903.66,
-                 "y":80.75
+                 "width":16.1024,
+                 "x":1904,
+                 "y":176
                 }, 
                 {
                  "ellipse":true,
@@ -1147,8 +1147,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":462.099177019461,
-                 "y":423.886563405314
+                 "x":462.099,
+                 "y":423.887
                 }],
          "opacity":1,
          "type":"objectgroup",
