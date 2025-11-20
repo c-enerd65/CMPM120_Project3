@@ -10,14 +10,14 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj": {
             "scale": 0.5605989583333333,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 867.8218051748968,
+                "x": 978.417800901194,
                 "y": 412.0592743995912
             }
         },
@@ -25,15 +25,18 @@
             "scaleInDock": 1
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj": {
-            "expandedObjectLayers": [
-                5
-            ],
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1112.6666666666665,
-                "y": 398.6666666666667
+                "x": 969,
+                "y": 404
             }
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj#monochromeTilemap": {
+            "scaleInDock": 3
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj#monochrome_tilemap": {
+            "scaleInDock": 1.5
         },
         "Map 1/LevelTwoMapDesign1.tmj": {
             "scale": 1.5,
