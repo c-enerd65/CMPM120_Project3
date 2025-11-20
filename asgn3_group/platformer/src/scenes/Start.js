@@ -17,12 +17,6 @@ export class Start extends Phaser.Scene {
         this.loadStartScreen();
         this.createStartButtons();
         this.startButtonAction();
-
-        //allows any key press to move to next scene
-        /*this.input.keyboard.on('keydown', () => {
-            this.scene.stop('Start');
-            this.scene.start('LevelOne');
-        });*/
     }
 
     loadFonts() {
@@ -85,10 +79,10 @@ export class Start extends Phaser.Scene {
         this.alien = this.add.sprite(305, 162, 'player')
         .setScale(1.75);
 
-        this.donut = this.add.sprite(285, 355, 'boost_1')
+        this.donut = this.add.sprite(290, 355, 'boost_1')
         .setScale(1.75);
 
-        this.titleText = this.add.text(175,340, 'Space    Runner', { 
+        this.titleText = this.add.text(180,340, 'Space    Racer', { 
             fontFamily: 'px',
             fontSize: '32px', 
             fill: '#FFF' 
