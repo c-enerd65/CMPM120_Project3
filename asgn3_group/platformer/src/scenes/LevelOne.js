@@ -29,6 +29,7 @@ export class LevelOne extends Phaser.Scene{
 
         this.initParticles();
         this.runTrail.stop();
+        this.staminaPick.stop();
 
         this.generateBoosts();
         this.generateGems();
@@ -202,6 +203,29 @@ export class LevelOne extends Phaser.Scene{
             follow: this.player,
             tint: 0xBAE2FF 
         });
+
+        this.staminaPick = this.add.particles(0, -16, 'plus', {
+            quantity: 5,
+            accelerationX: -100,
+            accelerationY:  -200,
+            speedY: {
+                min: 10,
+                max: 50
+            },
+            speedX: {
+                min: 10,
+                max: 60
+            },
+            scale: {
+                start: 0.7,
+                end: 0.05,
+                random: true
+            },
+            blendMode: 'ADD',
+            frequency: 100,
+            follow: this.player,
+            tint: 0xFFFFFF
+        });
     }
 
     generateBoosts() {
@@ -328,9 +352,11 @@ export class LevelOne extends Phaser.Scene{
         switch(boost.type) {
             case 'stamina':
                 this.player.stamina += boost.modifier;
+                this.staminaPick.start();
                 this.player.tint = 0xA8E477;
                 this.playAudio('stamina');
                 this.time.delayedCall(275, () => {
+                    this.staminaPick.stop();
                     this.player.tint = 0xFFFFFF;
                 });
                 break;
