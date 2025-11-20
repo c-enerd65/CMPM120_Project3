@@ -30,7 +30,8 @@ class Player extends Phaser.GameObjects.Sprite {
         this.speed = PLAYER_VELOCITY;
         this.boost = 1;
 
-        this.bullets = new PlayerShot(this.scene);
+        this.bullets = new PlayerShot(this.scene)
+        .setDepth(1);
 
         this.hasKey = false;
 
