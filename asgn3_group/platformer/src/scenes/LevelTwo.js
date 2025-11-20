@@ -149,7 +149,7 @@ export class LevelTwo extends Phaser.Scene {
         foePath()
         this.path.draw(this.graphics);
 
-        this.foe = new Foe(this, this.path, 550, 340);
+        this.foe = new Foe(this, this.path, 550, 200);
     }
 
     levelCollisions() {
@@ -188,6 +188,20 @@ export class LevelTwo extends Phaser.Scene {
 
         boost.destroy();
     }
+
+    //generateGems() {
+    //    this.gems = this.add.group('gem');
+    //    let object = this.map.getObjectLayer('collect');
+
+    //    for(var obj of object.objects) {
+    //        if(obj.properties[0].name == 'value') {
+    //            let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
+    //            gem.value = obj.properties[0].value;
+    //            this.gems.add(gem);
+    //        }
+    //    }
+
+    //}
 
     playerFall() {
         this.player.playerDamaged();
