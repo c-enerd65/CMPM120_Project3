@@ -18,7 +18,7 @@ export class LevelTwo extends Phaser.Scene {
 
         //add tilemap
         this.map = this.add.tilemap('tilemap_2');
-        var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
+        var tileset = this.map.addTilesetImage('monochrome_tilemap', 'monoTiles');
         
         //creates a new player, sets sprite scale 2x original size
         this.player = new Player(this, 0, 250);
@@ -27,7 +27,7 @@ export class LevelTwo extends Phaser.Scene {
         this.runTrail.start();
 
         this.generateBoosts();
-        this.generateMobs();
+        //this.generateMobs();
 
         this.mapCollisions(tileset);
         //this.movingPlatform(tileset);
@@ -158,17 +158,17 @@ export class LevelTwo extends Phaser.Scene {
         }
     }
 
-    generateMobs() {
-        this.foes = this.add.group();
-        let object = this.map.getObjectLayer('collect');
+    // generateMobs() {
+    //     this.foes = this.add.group();
+    //     let object = this.map.getObjectLayer('Items');
 
-        for(var obj of object.objects) {
-            if(obj.properties[0].name == 'enemy') {
-                let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
-                this.foes.add(foe);
-            }
-        }
-    }
+    //     for(var obj of object.objects) {
+    //         if(obj.properties[0].name == 'enemy') {
+    //             let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
+    //             this.foes.add(foe);
+    //         }
+    //     }
+    // }
 
     levelCollisions() {
         this.physics.add.collider(
