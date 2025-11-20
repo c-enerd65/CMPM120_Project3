@@ -13,10 +13,10 @@ export class Start extends Phaser.Scene {
     }
 
     create() {
-
         this.loadStartScreen();
         this.createStartButtons();
         this.startButtonAction();
+
     }
 
     loadFonts() {
@@ -97,37 +97,42 @@ export class Start extends Phaser.Scene {
 
     createStartButtons() {
         this.playG = this.add.sprite(0, 0, 'playButton')
-        .setOrigin(0)
-        .setScale(1.5);
-        this.playGText = this.add.text(95, 15, 'Start', { 
-            fontFamily: 'px',
-            fontSize: '36px', 
-            fill: '#000' 
-        });
-
-        this.startG = this.add.container(850, 215, [this.playG, this.playGText])
-        .setSize(192, 48);
-
-        this.playOne = this.add.sprite(0, 0, 'playButton')
-        .setOrigin(0)
-        .setScale(1.5);
-        this.playOneText = this.add.text(45, 10, 'Start Level One\n\t\t - Cienna -', { 
+        //.setOrigin(0)
+        //.setScale(1.5);
+        this.playGText = this.add.text(0, 0, 'Start', { 
             fontFamily: 'px',
             fontSize: '24px', 
             fill: '#000' 
         });
+        this.playGText.setOrigin(0.5);
+        
+        this.startG = this.add.container(850, 215, [this.playG, this.playGText])
+        .setSize(192, 48);
+
+        this.playOne = this.add.sprite(0, 0, 'playButton')
+        //.setOrigin(0)
+        //.setScale(1.5);
+        this.playOneText = this.add.text(0, 0, 'Start Level One\n\t - Cienna -', { 
+            fontFamily: 'px',
+            fontSize: '20px', 
+            fill: '#000' 
+        });
+        this.playOneText.setOrigin(0.5);
+
 
         this.startOne = this.add.container(850, 320, [this.playOne, this.playOneText])
         .setSize(192, 48);
 
         this.playTwo = this.add.sprite(0, 0, 'playButton')
-        .setOrigin(0)
-        .setScale(1.5);
-        this.playTwoText = this.add.text(45, 10, 'Start Level Two\n\t\t - Saira -', { 
+        //.setOrigin(0)
+        //.setScale(1.5);
+        this.playTwoText = this.add.text(0, 0, 'Start Level Two\n\t - Saira -', { 
             fontFamily: 'px',
-            fontSize: '24px', 
+            fontSize: '20px', 
             fill: '#000' 
         });
+        this.playTwoText.setOrigin(0.5);
+
 
         this.startTwo = this.add.container(850, 425, [this.playTwo, this.playTwoText])
         .setSize(192, 48);
@@ -137,7 +142,11 @@ export class Start extends Phaser.Scene {
         this.startG.setInteractive();
         this.startOne.setInteractive();
         this.startTwo.setInteractive();
-
+    console.log(this.startG.input);
+    this.input.enableDebug(this.startG);
+    this.input.on('pointerDown', p => {
+        console.log("global pointer down", p.x, p.y);
+    });
         this.startG.on('pointerover', () => {
             this.tweens.add({
                 targets: this.startG,
@@ -148,7 +157,6 @@ export class Start extends Phaser.Scene {
                 repeat: 0
             });
         });
-
         this.startG.on('pointerdown', () => {
             this.sound.play('select');
 
