@@ -246,64 +246,40 @@
          "name":"Items",
          "objects":[
                 {
-                 "ellipse":true,
-                 "height":21.5,
-                 "id":18,
-                 "name":"",
+                 "gid":103,
+                 "height":16,
+                 "id":27,
+                 "name":"Gem",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":21.5,
-                 "x":8,
-                 "y":58
+                 "width":16,
+                 "x":656.04347826087,
+                 "y":236.434782608696
                 }, 
                 {
-                 "ellipse":true,
-                 "height":22.5,
-                 "id":20,
-                 "name":"",
+                 "gid":103,
+                 "height":16,
+                 "id":28,
+                 "name":"Gem",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":22.25,
-                 "x":598.5,
-                 "y":425.25
+                 "width":16,
+                 "x":7.875,
+                 "y":76.125
                 }, 
                 {
-                 "ellipse":true,
-                 "height":20.75,
-                 "id":21,
-                 "name":"",
+                 "gid":103,
+                 "height":16,
+                 "id":29,
+                 "name":"Gem",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":19.5,
-                 "x":664.25,
-                 "y":219.5
-                }, 
-                {
-                 "ellipse":true,
-                 "height":19.625,
-                 "id":22,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":18.875,
-                 "x":1351.25,
-                 "y":140.375
-                }, 
-                {
-                 "ellipse":true,
-                 "height":21.3333333333333,
-                 "id":23,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":21.3333333333335,
-                 "x":1266.66666666667,
-                 "y":556
+                 "width":16,
+                 "x":600.125,
+                 "y":444.375
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -312,7 +288,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":24,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -329,6 +305,16 @@
          "spacing":1,
          "tilecount":400,
          "tileheight":16,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":25
+                        }]
+                }],
          "tilewidth":16
         }],
  "tilewidth":16,

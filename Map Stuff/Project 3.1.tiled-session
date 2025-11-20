@@ -54,11 +54,11 @@
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 0.75,
-            "selectedLayer": 3,
+            "scale": 4,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 565.9999999999999,
-                "y": 384
+                "x": 657.625,
+                "y": 250.75
             }
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj#monochrome_tilemap": {
