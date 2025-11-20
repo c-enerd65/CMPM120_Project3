@@ -5,38 +5,64 @@
     },
     "activeFile": "",
     "expandedProjectPaths": [
-        "."
+        "Tiles_2",
+        ".",
+        "Map 1"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 0.75,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj": {
-            "scale": 0.5605989583333333,
+            "expandedObjectLayers": [
+                9
+            ],
+            "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 978.417800901194,
-                "y": 412.0592743995912
+                "x": 57.5,
+                "y": 553
             }
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj#monochromeTilemap": {
             "scaleInDock": 1
         },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj#monochrome_tilemap": {
+            "scaleInDock": 1
+        },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj": {
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 969,
-                "y": 404
+                "x": 694.5,
+                "y": 297
             }
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj#monochromeTilemap": {
             "scaleInDock": 3
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj#monochrome_tilemap": {
-            "scaleInDock": 1.5
+            "scaleInDock": 1.5,
+            "scaleInEditor": 2
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/new_monochrome_tileset.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj": {
+            "expandedObjectLayers": [
+                8
+            ],
+            "scale": 4,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 657.625,
+                "y": 250.75
+            }
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj#monochrome_tilemap": {
+            "scaleInDock": 1
         },
         "Map 1/LevelTwoMapDesign1.tmj": {
             "scale": 1.5,
@@ -62,6 +88,7 @@
     "openFiles": [
     ],
     "project": "Project 3.1.tiled-project",
+    "property.type": "int",
     "recentFiles": [
         "Tiles_2/monochrome_tilemap.tsx"
     ],

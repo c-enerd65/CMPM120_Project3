@@ -22,13 +22,14 @@ export class LevelTwo extends Phaser.Scene {
         this.map.createLayer("Background", tileset, 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 250);
+        this.player = new Player(this, 0, 170);
 
         this.initParticles();
         this.runTrail.start();
 
         this.generateBoosts();
         //this.generateMobs();
+        this.generateGems();
 
         this.mapCollisions(tileset);
         //this.movingPlatform(tileset);
@@ -97,10 +98,33 @@ export class LevelTwo extends Phaser.Scene {
    
 
     levelCamera() {
-        //playing around with the camera settings [subject to change]
+         this.scoreText = this.add.text(this.center_w - 150, 20, `Score: ${this.player.score}`, {
+            backgroundColor: '#000',
+            fontFamily: 'px',
+            fontSize: '16px',
+            fill: '#FFF' 
+        });
+
+        this.staminaText = this.add.text(this.center_w, 20, `Stamina: ${this.player.stamina}`, {
+            backgroundColor: '#000',
+            fontFamily: 'px',
+            fontSize: '16px',
+            fill: '#FFF' 
+        });
+
+        this.livesText = this.add.text(this.center_w + 150, 20, `Lives: ${this.player.lives}`, {
+            backgroundColor: '#000',
+            fontFamily: 'px',
+            fontSize: '16px',
+            fill: '#FFF' 
+        });
+        
         this.playerCam = this.cameras.main.setBounds(0, 0, this.width, this.height); //creates camera var
         this.playerCam.startFollow(this.player, true, 0.5, 0.5, -200, 120); //sets camera to follow player
         this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
+
+        //this.hud = this.add.container(this.player.x, this.player.y - 50, [this.scoreText, this.staminaText, this.livesText]);
+        //this.hud.setScrollFactor(0);
     }
 
     loadAudio() {
@@ -148,7 +172,7 @@ export class LevelTwo extends Phaser.Scene {
 
         const bSpawn = {
             x: [50, 150],
-            y: [350, 310]
+            y: [350, 200] // place before large gap
         }
 
         for(let i = 0; i < bSpawn.x.length; i++) {
@@ -157,6 +181,20 @@ export class LevelTwo extends Phaser.Scene {
 
             this.availBoost.add(boost);
         }
+    }
+
+    generateGems() {
+        this.gems = this.add.group('gem');
+        let object = this.map.getObjectLayer('Items');
+
+        for(var obj of object.objects) {
+            if(obj.properties[0].name == 'value') {
+                let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
+                gem.value = obj.properties[0].value;
+                this.gems.add(gem);
+            }
+        }
+
     }
 
     // generateMobs() {
