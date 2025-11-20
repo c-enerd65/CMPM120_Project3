@@ -41,7 +41,6 @@ export class LevelOne extends Phaser.Scene{
 
         this.playAudio('theme');
 
-        this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         this.TWO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
 
         this.levelCollisions();
@@ -62,11 +61,6 @@ export class LevelOne extends Phaser.Scene{
 
             this.scene.stop(this.scene);
             this.scene.start('End');
-        }
-
-        //remove later
-        if(Phaser.Input.Keyboard.JustDown(this.R)) {
-            this.resetGame();
         }
 
         if(Phaser.Input.Keyboard.JustDown(this.TWO)) {
@@ -395,17 +389,7 @@ export class LevelOne extends Phaser.Scene{
     destroyFoe(foe) {
         this.playAudio('enemyHit');
         this.player.score += foe.points;
-        if(this.player.bullets != undefined){
-            this.player.bullets.sushiHit();
-        }
+        this.player.bullets.sushiHit();
         foe.destroy();
-    }
-
-    resetGame() {
-        this.player.destroy();
-
-        this.scene.stop(this.scene);
-        this.stopAudio('theme');
-        this.scene.start('LevelOne');
     }
 }

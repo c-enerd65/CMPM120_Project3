@@ -23,7 +23,9 @@ class PlayerShot extends Phaser.Physics.Arcade.Group {
     }
 
     sushiHit() {
-        this.sushi.hit = true;
+        if(this.sushi != undefined) {
+            this.sushi.hit = true;
+        }
     }
 }
 
