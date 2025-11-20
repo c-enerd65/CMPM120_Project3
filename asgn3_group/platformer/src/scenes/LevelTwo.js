@@ -27,7 +27,7 @@ export class LevelTwo extends Phaser.Scene {
         this.runTrail.start();
 
         this.generateBoosts();
-        //this.generateMobs();
+        this.generateMobs();
 
         this.mapCollisions(tileset);
         this.levelCamera();
@@ -70,6 +70,11 @@ export class LevelTwo extends Phaser.Scene {
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foe);
 
+        var movingPlatform = this.map.createLayer("Platform", tileset, 0, 0);
+        movingPlatform.setCollisionBetween(1, this.width);
+        this.physics.add.collider(movingPlatform, this.player);
+        this.physics.add.collider(movingPlatform, this.foe);
+
         var spike = this.map.createLayer("Ouch", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
         this.physics.add.collider(
@@ -82,6 +87,9 @@ export class LevelTwo extends Phaser.Scene {
             this
         );
     }
+
+    //this.platform = this.physics.add.image(x, y, 'platformImage');
+    //this.platform.setImmovable(true); // Makes it a static body
 
     levelCamera() {
         //playing around with the camera settings [subject to change]
@@ -147,16 +155,15 @@ export class LevelTwo extends Phaser.Scene {
     }
 
     generateMobs() {
-        const foePath = () => {
-            this.path = new Phaser.Curves.Path(550, 400);
-            this.path.lineTo(650, 400);
-            this.graphics = this.add.graphics();
+        this.foes = this.add.group();
+        let object = this.map.getObjectLayer('collect');
+
+        for(var obj of object.objects) {
+            if(obj.properties[0].name == 'enemy') {
+                let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
+                this.foes.add(foe);
+            }
         }
-
-        foePath()
-        this.path.draw(this.graphics);
-
-        this.foe = new Foe(this, this.path, 550, 340);
     }
 
     levelCollisions() {

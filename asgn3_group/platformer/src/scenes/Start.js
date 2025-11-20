@@ -142,11 +142,7 @@ export class Start extends Phaser.Scene {
         this.startG.setInteractive();
         this.startOne.setInteractive();
         this.startTwo.setInteractive();
-    console.log(this.startG.input);
-    this.input.enableDebug(this.startG);
-    this.input.on('pointerDown', p => {
-        console.log("global pointer down", p.x, p.y);
-    });
+
         this.startG.on('pointerover', () => {
             this.tweens.add({
                 targets: this.startG,
