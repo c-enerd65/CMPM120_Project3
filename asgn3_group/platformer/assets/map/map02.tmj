@@ -225,61 +225,6 @@
          "width":120,
          "x":0,
          "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":7,
-         "name":"Move",
-         "objects":[
-                {
-                 "height":15.6666666666667,
-                 "id":14,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":144,
-                 "y":80
-                }, 
-                {
-                 "height":16.6666666666667,
-                 "id":15,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64.6666666666667,
-                 "x":303.666666666667,
-                 "y":79.6666666666667
-                }, 
-                {
-                 "height":15.5,
-                 "id":16,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":65,
-                 "x":1023.5,
-                 "y":112
-                }, 
-                {
-                 "height":16,
-                 "id":17,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1184,
-                 "y":112
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
         }],
  "nextlayerid":8,
  "nextobjectid":18,

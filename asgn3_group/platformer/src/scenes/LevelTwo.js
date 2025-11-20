@@ -30,6 +30,7 @@ export class LevelTwo extends Phaser.Scene {
         this.generateMobs();
 
         this.mapCollisions(tileset);
+        //this.movingPlatform(tileset);
         this.levelCamera();
         this.loadAudio();
 
@@ -70,10 +71,10 @@ export class LevelTwo extends Phaser.Scene {
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foe);
 
-        var movingPlatform = this.map.createLayer("Platform", tileset, 0, 0);
-        movingPlatform.setCollisionBetween(1, this.width);
-        this.physics.add.collider(movingPlatform, this.player);
-        this.physics.add.collider(movingPlatform, this.foe);
+        // var movingPlatform = this.map.createLayer("Platform", tileset, 0, 0);
+        // movingPlatform.setCollisionBetween(1, this.width);
+        // this.physics.add.collider(movingPlatform, this.player);
+        // this.physics.add.collider(movingPlatform, this.foe);
 
         var spike = this.map.createLayer("Ouch", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
@@ -88,8 +89,11 @@ export class LevelTwo extends Phaser.Scene {
         );
     }
 
-    //this.platform = this.physics.add.image(x, y, 'platformImage');
-    //this.platform.setImmovable(true); // Makes it a static body
+    // movingPlatform(movingPlatform) {
+    //     this.movingPlatform = this.physics.add.image(x, y, 'Platform');
+    //     this.movingPlatform.setImmovable(true); // Makes it a static body
+    //     }
+   
 
     levelCamera() {
         //playing around with the camera settings [subject to change]
