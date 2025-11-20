@@ -19,11 +19,9 @@ export class LevelTwo extends Phaser.Scene {
         //add tilemap
         this.map = this.add.tilemap('tilemap_2');
         var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
-        this.map.createLayer("Background", 0, 0);
-        //this.map.createLayer("Ouch", 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 200);
+        this.player = new Player(this, 0, 250);
 
         this.initParticles();
         this.runTrail.start();
@@ -46,6 +44,15 @@ export class LevelTwo extends Phaser.Scene {
     update() {
         this.player.update();
         
+        /*if(this.player.lives <= 0)
+        {
+            this.player.destroy();
+
+            this.scene.stop(this.scene);
+            this.scene.start('End');
+        }*/
+
+        //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
             this.resetGame();
         }
@@ -149,7 +156,7 @@ export class LevelTwo extends Phaser.Scene {
         foePath()
         this.path.draw(this.graphics);
 
-        this.foe = new Foe(this, this.path, 550, 200);
+        this.foe = new Foe(this, this.path, 550, 340);
     }
 
     levelCollisions() {
@@ -189,24 +196,8 @@ export class LevelTwo extends Phaser.Scene {
         boost.destroy();
     }
 
-    //generateGems() {
-    //    this.gems = this.add.group('gem');
-    //    let object = this.map.getObjectLayer('collect');
-
-    //    for(var obj of object.objects) {
-    //        if(obj.properties[0].name == 'value') {
-    //            let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
-    //            gem.value = obj.properties[0].value;
-    //            this.gems.add(gem);
-    //        }
-    //    }
-
-    //}
-
     playerFall() {
         this.player.playerDamaged();
-        this.player.playerReset();
-
     }
 
     resetGame() {
