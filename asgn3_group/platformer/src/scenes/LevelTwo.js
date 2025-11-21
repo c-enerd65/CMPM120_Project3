@@ -47,13 +47,13 @@ export class LevelTwo extends Phaser.Scene {
     update() {
         this.player.update();
         
-        /*if(this.player.lives <= 0)
+        if(this.player.lives <= 0)
         {
             this.player.destroy();
 
             this.scene.stop(this.scene);
             this.scene.start('End');
-        }*/
+        }
 
         //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
@@ -119,9 +119,9 @@ export class LevelTwo extends Phaser.Scene {
             fill: '#FFF' 
         });
         
-        this.playerCam = this.cameras.main.setBounds(0, 0, this.width, this.height); //creates camera var
-        this.playerCam.startFollow(this.player, true, 0.5, 0.5, -200, 120); //sets camera to follow player
-        this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
+        let camera = this.cameras.main.setBounds(0, 0, this.width, this.height, true); //creates camera var
+        camera.startFollow(this.player, true, 0.5, 0.5, -200, 120);
+        camera.setZoom(1.75, 1.75);
 
         //this.hud = this.add.container(this.player.x, this.player.y - 50, [this.scoreText, this.staminaText, this.livesText]);
         //this.hud.setScrollFactor(0);
@@ -152,15 +152,15 @@ export class LevelTwo extends Phaser.Scene {
 
     initParticles() {
         this.runTrail = this.add.particles(-8, 8, 'star', {
-            quantity: 1,
-            accelerationX: -250,
+            quantity: 0.01,
+            accelerationX: -50,
             speedY: {
-                min: 10,
-                max: 20
+                min: 2,
+                max: 10
             },
             speedX: {
-                min: 10,
-                max: 30
+                min: 2,
+                max: 10
             },
             scale: {
                 start: 0.1,
