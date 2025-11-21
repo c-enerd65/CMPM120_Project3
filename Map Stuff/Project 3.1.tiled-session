@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj",
     "expandedProjectPaths": [
         "Tiles_2",
         ".",
@@ -12,8 +12,8 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 3,
+            "scaleInEditor": 2
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj": {
             "expandedObjectLayers": [
@@ -22,7 +22,7 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 57.5,
+                "x": 207.5,
                 "y": 553
             }
         },
@@ -33,11 +33,11 @@
             "scaleInDock": 1
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj": {
-            "scale": 1,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 694.5,
-                "y": 297
+                "x": 801.9999999999999,
+                "y": 372
             }
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj#monochromeTilemap": {
@@ -50,16 +50,30 @@
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/new_monochrome_tileset.tsx": {
             "scaleInDock": 1
         },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newest_map02.tmj": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 789,
+                "y": 450
+            }
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newest_map02.tmj#monochromeTilemap2": {
+            "scaleInDock": 1
+        },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj": {
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 4,
+            "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 657.625,
-                "y": 250.75
+                "x": 559.3333333333333,
+                "y": 404
             }
+        },
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj#monochromeTilemap": {
+            "scaleInDock": 1
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj#monochrome_tilemap": {
             "scaleInDock": 1
@@ -79,21 +93,27 @@
             "scaleInEditor": 0.25
         }
     },
-    "last.imagePath": "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/Map Stuff",
+    "last.imagePath": "C:/Users/Saira Hamid/Downloads/kenney_1-bit-platformer-pack (1)/Tilemap",
     "map.height": 45,
     "map.lastUsedFormat": "json",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 120,
     "openFiles": [
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj",
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj"
     ],
     "project": "Project 3.1.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj",
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj",
+        "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/newmap02.tmj",
         "Tiles_2/monochrome_tilemap.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
+    "tileset.spacing": 0,
     "tileset.tileSize": {
         "height": 16,
         "width": 16

@@ -18,7 +18,7 @@ export class LevelTwo extends Phaser.Scene {
 
         //add tilemap
         this.map = this.add.tilemap('tilemap_2');
-        var tileset = this.map.addTilesetImage('monochromeTilemap', 'monoTiles');
+        var tileset = this.map.addTilesetImage('monochromeTilemap2', 'monoTiles');
         this.map.createLayer("Background", tileset, 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
@@ -187,13 +187,13 @@ export class LevelTwo extends Phaser.Scene {
         this.gems = this.add.group('gem');
         let object = this.map.getObjectLayer('Items');
 
-        for(var obj of object.objects) {
-            if(obj.properties[0].name == 'value') {
-                let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
-                gem.value = obj.properties[0].value;
-                this.gems.add(gem);
-            }
-        }
+        // for(var obj of object.objects) {
+        //     if(obj.properties[0].name == 'value') {
+        //         let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
+        //         gem.value = obj.properties[0].value;
+        //         this.gems.add(gem);
+        //     }
+        // }
 
     }
 
