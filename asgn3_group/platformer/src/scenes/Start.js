@@ -69,7 +69,7 @@ export class Start extends Phaser.Scene {
     loadMaps() {
         this.load.image('monoTiles', 'assets/map/monochrome_tilemap_packed.png');
         this.load.tilemapTiledJSON('tilemap_1', 'assets/map/map01.tmj');
-        this.load.tilemapTiledJSON('tilemap_2', 'assets/map/map02.tmj');
+        this.load.tilemapTiledJSON('tilemap_2', 'assets/map/newest_map02.tmj');
     }
 
     loadStartScreen() {
