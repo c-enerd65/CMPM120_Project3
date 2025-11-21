@@ -7,10 +7,6 @@ export class LevelTwo extends Phaser.Scene {
         super('LevelTwo');
     }  
 
-    preload() {
-        this.load.image('platform', 'assets/sprites/platform.png');
-    }
-
     create() {
         //gets total screen width
         this.width = this.sys.game.config.width;
