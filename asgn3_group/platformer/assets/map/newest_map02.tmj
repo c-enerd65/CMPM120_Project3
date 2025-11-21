@@ -275,10 +275,43 @@
          "height":45,
          "id":5,
          "name":"Platform",
-         "opacity":1,
+         "opacity":0.45,
          "type":"tilelayer",
          "visible":true,
          "width":120,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":11,
+         "name":"Platform",
+         "objects":[
+                {
+                 "height":16.875,
+                 "id":28,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64.75,
+                 "x":127.625,
+                 "y":63.375
+                }, 
+                {
+                 "height":16.5,
+                 "id":29,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64.625,
+                 "x":303.75,
+                 "y":63.75
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -335,6 +368,34 @@
          "type":"tilelayer",
          "visible":true,
          "width":120,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":10,
+         "name":"Flag",
+         "objects":[
+                {
+                 "height":15.8181818181818,
+                 "id":27,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1871.81818181818,
+                 "y":560.181818181818
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"door",
+                 "type":"string",
+                 "value":"door"
+                }],
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -480,73 +541,17 @@
          "visible":true,
          "x":0,
          "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":9,
-         "name":"Enemies",
-         "objects":[
-                {
-                 "ellipse":true,
-                 "height":17,
-                 "id":23,
-                 "name":"Enemy",
-                 "properties":[
-                        {
-                         "name":"enemy",
-                         "type":"string",
-                         "value":"lvl3_foe"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":18,
-                 "x":575.25,
-                 "y":94.375
-                }, 
-                {
-                 "ellipse":true,
-                 "height":15.25,
-                 "id":24,
-                 "name":"Enemy",
-                 "properties":[
-                        {
-                         "name":"enemy",
-                         "type":"string",
-                         "value":"lv1_foe"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":14.75,
-                 "x":177.75,
-                 "y":208.25
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
         }],
- "nextlayerid":10,
- "nextobjectid":26,
+ "nextlayerid":12,
+ "nextobjectid":31,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
  "tileheight":16,
  "tilesets":[
         {
-         "columns":20,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Downloads\/kenney_1-bit-platformer-pack (1)\/Tilemap\/monochrome_tilemap_packed.png",
-         "imageheight":320,
-         "imagewidth":320,
-         "margin":0,
-         "name":"monochromeTilemap2",
-         "spacing":0,
-         "tilecount":400,
-         "tileheight":16,
-         "tilewidth":16
+         "source":"monochromeTilemap2.tsx"
         }],
  "tilewidth":16,
  "type":"map",
