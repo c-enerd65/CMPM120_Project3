@@ -60,14 +60,70 @@ export class LevelTwo extends Phaser.Scene {
             this.scene.start('End');
         }
 
-        if (this.floor2.x >= 400) {
-            this.floor2.body.setVelocityX(-50);
+        if (this.movPlat1.x >= 320) {
+            this.movPlat1.body.setVelocityX(-50);
         }
-        else if (this.floor2.x <= 350) {
-            this.floor2.body.setVelocityX(50);
+        else if (this.movPlat1.x <= 270) {
+            this.movPlat1.body.setVelocityX(50);
         }
 
-        //remove later
+        if (this.movPlat2.x >= 150) {
+            this.movPlat2.body.setVelocityX(-50);
+        }
+        else if (this.movPlat2.x <= 100) {
+            this.movPlat2.body.setVelocityX(50);
+        }
+
+        if (this.movPlat3.x >= 1100) {
+            this.movPlat3.body.setVelocityX(-50);
+        }
+        else if (this.movPlat3.x <= 1050) {
+            this.movPlat3.body.setVelocityX(50);
+        }
+
+        if (this.movPlat4.x >= 1400) {
+            this.movPlat4.body.setVelocityX(-50);
+        }
+        else if (this.movPlat4.x <= 1350) {
+            this.movPlat4.body.setVelocityX(50);
+        }
+
+        if (this.movPlat5.x >= 1500) {
+            this.movPlat5.body.setVelocityX(-50);
+        }
+        else if (this.movPlat5.x <= 1450) {
+            this.movPlat5.body.setVelocityX(50);
+        }
+
+        if (this.movPlat6.x >= 1400) {
+            this.movPlat6.body.setVelocityX(-50);
+        }
+        else if (this.movPlat6.x <= 1350) {
+            this.movPlat6.body.setVelocityX(50);
+        }
+
+        if (this.movPlat7.x >= 1500) {
+            this.movPlat7.body.setVelocityX(-50);
+        }
+        else if (this.movPlat7.x <= 1450) {
+            this.movPlat7.body.setVelocityX(50);
+        }
+
+          if (this.movPlat8.x >= 1400) {
+            this.movPlat8.body.setVelocityX(-50);
+        }
+        else if (this.movPlat8.x <= 1350) {
+            this.movPlat8.body.setVelocityX(50);
+        }
+
+        if (this.movPlat9.x >= 1500) {
+            this.movPlat9.body.setVelocityX(-50);
+        }
+        else if (this.movPlat9.x <= 1450) {
+            this.movPlat9.body.setVelocityX(50);
+        }
+
+        // use in place of loss condition
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
             this.resetGame();
         }
@@ -94,13 +150,59 @@ export class LevelTwo extends Phaser.Scene {
     }
 
     movingPlatform() {
-        let floor2 = this.physics.add.existing(this.add.rectangle(400, 80, 80, 20, 0xFFFFFF))
-        floor2.body.setAllowGravity(false);
-        floor2.body.setImmovable(true);
-     
-        this.floor2 = floor2;
+        let movPlat1 = this.physics.add.existing(this.add.rectangle(320, 70, 80, 20, 0xFFFFFF))
+        movPlat1.body.setAllowGravity(false);
+        movPlat1.body.setImmovable(true);
+        this.movPlat1 = movPlat1;
+        this.physics.add.collider(this.player, movPlat1);
 
-        this.physics.add.collider(this.player, floor2);
+        let movPlat2 = this.physics.add.existing(this.add.rectangle(150, 70, 80, 20, 0xFFFFFF))
+        movPlat2.body.setAllowGravity(false);
+        movPlat2.body.setImmovable(true);
+        this.movPlat2 = movPlat2;
+        this.physics.add.collider(this.player, movPlat2);
+
+        let movPlat3 = this.physics.add.existing(this.add.rectangle(1100, 70, 80, 20, 0xFFFFFF))
+        movPlat3.body.setAllowGravity(false);
+        movPlat3.body.setImmovable(true);
+        this.movPlat3 = movPlat3;
+        this.physics.add.collider(this.player, movPlat3);
+
+        let movPlat4 = this.physics.add.existing(this.add.rectangle(1400, 550, 80, 20, 0xFFFFFF))
+        movPlat4.body.setAllowGravity(false);
+        movPlat4.body.setImmovable(true);
+        this.movPlat4 = movPlat4;
+        this.physics.add.collider(this.player, movPlat4);
+
+        let movPlat5 = this.physics.add.existing(this.add.rectangle(1500, 480, 80, 20, 0xFFFFFF))
+        movPlat5.body.setAllowGravity(false);
+        movPlat5.body.setImmovable(true);
+        this.movPlat5 = movPlat5;
+        this.physics.add.collider(this.player, movPlat5);
+
+        let movPlat6 = this.physics.add.existing(this.add.rectangle(1400, 410, 80, 20, 0xFFFFFF))
+        movPlat6.body.setAllowGravity(false);
+        movPlat6.body.setImmovable(true);
+        this.movPlat6 = movPlat6;
+        this.physics.add.collider(this.player, movPlat6);
+
+        let movPlat7 = this.physics.add.existing(this.add.rectangle(1500, 340, 80, 20, 0xFFFFFF))
+        movPlat7.body.setAllowGravity(false);
+        movPlat7.body.setImmovable(true);
+        this.movPlat7 = movPlat7;
+        this.physics.add.collider(this.player, movPlat7);
+
+        let movPlat8 = this.physics.add.existing(this.add.rectangle(1400, 270, 80, 20, 0xFFFFFF))
+        movPlat8.body.setAllowGravity(false);
+        movPlat8.body.setImmovable(true);
+        this.movPlat8 = movPlat8;
+        this.physics.add.collider(this.player, movPlat8);
+
+        let movPlat9 = this.physics.add.existing(this.add.rectangle(1500, 200, 80, 20, 0xFFFFFF))
+        movPlat9.body.setAllowGravity(false);
+        movPlat9.body.setImmovable(true);
+        this.movPlat9 = movPlat9;
+        this.physics.add.collider(this.player, movPlat9);
 
         }
    
@@ -211,17 +313,11 @@ export class LevelTwo extends Phaser.Scene {
     }
 
     generateWinCon() {
-        this.levelEnd = this.add.group('door');
-        let object = this.map.getObjectLayer('Flag');
-
-        for(var obj of object.objects) {
-                if(obj.properties[0].name == 'door') {
-                let door = this.physics.add.staticSprite(obj.x, obj.y, 'door');
-                this.levelEnd.add(door);
-                }
-            }
-
-        this.levelEnd.setVisible(false);
+        if(this.player.score == 175) {
+            this.scene.stop(this);
+            this.stopAudio('theme');
+            this.scene.start('End');
+        }
     } 
 
 
