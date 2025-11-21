@@ -28,8 +28,10 @@ export class LevelTwo extends Phaser.Scene {
         this.runTrail.start();
 
         this.generateBoosts();
-        //this.generateMobs();
+        this.generateMobs();
         this.generateGems();
+        this.generateWinCon();
+
 
         this.mapCollisions(tileset);
         //this.movingPlatform(tileset);
@@ -46,14 +48,19 @@ export class LevelTwo extends Phaser.Scene {
 
     update() {
         this.player.update();
+
+        this.scoreText.text = `Score: ${this.player.score}`;
+        this.staminaText.text = `Stamina: ${this.player.stamina}`;
+        this.livesText.text = `Lives: ${this.player.lives}`;
         
-        /*if(this.player.lives <= 0)
+        if(this.player.lives <= 0)
         {
             this.player.destroy();
+            this.sound.stopAll();
 
             this.scene.stop(this.scene);
             this.scene.start('End');
-        }*/
+        }
 
         //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
@@ -119,9 +126,9 @@ export class LevelTwo extends Phaser.Scene {
             fill: '#FFF' 
         });
         
-        this.playerCam = this.cameras.main.setBounds(0, 0, this.width, this.height); //creates camera var
-        this.playerCam.startFollow(this.player, true, 0.5, 0.5, -200, 120); //sets camera to follow player
-        this.playerCam.setZoom(1.75, 1.75); //zooms the camera in
+        let camera = this.cameras.main.setBounds(0, 0, this.width, this.height, true); //creates camera var
+        camera.startFollow(this.player, true, 0.5, 0.5, -200, 120);
+        camera.setZoom(1.75, 1.75);
 
         //this.hud = this.add.container(this.player.x, this.player.y - 50, [this.scoreText, this.staminaText, this.livesText]);
         //this.hud.setScrollFactor(0);
@@ -152,15 +159,15 @@ export class LevelTwo extends Phaser.Scene {
 
     initParticles() {
         this.runTrail = this.add.particles(-8, 8, 'star', {
-            quantity: 1,
-            accelerationX: -250,
+            quantity: 0.01,
+            accelerationX: -50,
             speedY: {
-                min: 10,
-                max: 20
+                min: 2,
+                max: 10
             },
             speedX: {
-                min: 10,
-                max: 30
+                min: 2,
+                max: 10
             },
             scale: {
                 start: 0.1,
@@ -215,6 +222,21 @@ export class LevelTwo extends Phaser.Scene {
              }
          }
      }
+
+    generateWinCon() {
+        this.levelBlock = this.add.group('wall');
+        let object = this.map.getObjectLayer('collect');
+
+        for(var obj of object.objects) {
+                if(obj.properties[0].name == 'door') {
+                let door = this.physics.add.staticSprite(obj.x, obj.y, 'wall');
+                this.levelBlock.add(door);
+                }
+            }
+
+        this.levelBlock.setVisible(false);
+    }
+
 
     levelCollisions() {
         this.physics.add.collider(
@@ -276,6 +298,19 @@ export class LevelTwo extends Phaser.Scene {
         this.player.playerReset();
     }
 
+    /* playerHit(foe) {
+        this.playAudio('playerHit');
+        this.player.playerDamaged();
+        this.player.lives -= foe.damage;
+        foe.destroy();
+    }
+
+    destroyFoe(foe) {
+        this.playAudio('enemyHit');
+        this.player.score += foe.points;
+        this.player.bullets.sushiHit();
+        foe.destroy();
+    } */
     resetGame() {
         this.player.destroy();
 
