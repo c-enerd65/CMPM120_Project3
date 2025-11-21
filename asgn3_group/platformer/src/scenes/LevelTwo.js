@@ -7,6 +7,10 @@ export class LevelTwo extends Phaser.Scene {
         super('LevelTwo');
     }  
 
+    preload() {
+        this.load.image('platform', 'assets/sprites/platform.png');
+    }
+
     create() {
         //gets total screen width
         this.width = this.sys.game.config.width;
@@ -22,19 +26,17 @@ export class LevelTwo extends Phaser.Scene {
         this.map.createLayer("Background", tileset, 0, 0);
         
         //creates a new player, sets sprite scale 2x original size
-        this.player = new Player(this, 0, 170);
+        this.player = new Player(this, 0, 170); 
 
         this.initParticles();
         this.runTrail.start();
 
         this.generateBoosts();
-        this.generateMobs();
         this.generateGems();
-        this.generateWinCon();
-
+        //this.generateWinCon();
 
         this.mapCollisions(tileset);
-        //this.movingPlatform(tileset);
+        this.movingPlatform();
         this.levelCamera();
         this.loadAudio();
 
@@ -62,6 +64,13 @@ export class LevelTwo extends Phaser.Scene {
             this.scene.start('End');
         }
 
+        if (this.floor2.x >= 400) {
+            this.floor2.body.setVelocityX(-50);
+        }
+        else if (this.floor2.x <= 350) {
+            this.floor2.body.setVelocityX(50);
+        }
+
         //remove later
         if(Phaser.Input.Keyboard.JustDown(this.R)) {
             this.resetGame();
@@ -75,33 +84,29 @@ export class LevelTwo extends Phaser.Scene {
     }
 
     mapCollisions(tileset) {
+        console.log("WeEEE");
+
         var ground = this.map.createLayer("Base", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
         this.physics.add.collider(ground, this.player);
-        this.physics.add.collider(ground, this.foe);
-
-        var movingPlatform = this.map.createLayer("Platform", tileset, 0, 0);
-        movingPlatform.setCollisionBetween(1, this.width);
-        this.physics.add.collider(movingPlatform, this.player);
-        this.physics.add.collider(movingPlatform, this.foe);
 
         var spike = this.map.createLayer("Ouch", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
-        this.physics.add.collider(
-            spike, 
-            this.player, 
-            this.playerFall, 
-            () => {
-                return true;
-            },
-            this
-        );
+        this.physics.add.collider(spike, this.player); 
+        // couldn't get my spikes to work for whatever reason :o
+        
     }
 
-    // movingPlatform(movingPlatform) {
-    //     this.movingPlatform = this.physics.add.image(x, y, 'Platform');
-    //     this.movingPlatform.setImmovable(true); // Makes it a static body
-    //     }
+    movingPlatform() {
+        let floor2 = this.physics.add.existing(this.add.rectangle(400, 80, 80, 20, 0xFFFFFF))
+        floor2.body.setAllowGravity(false);
+        floor2.body.setImmovable(true);
+     
+        this.floor2 = floor2;
+
+        this.physics.add.collider(this.player, floor2);
+
+        }
    
 
     levelCamera() {
@@ -130,8 +135,6 @@ export class LevelTwo extends Phaser.Scene {
         camera.startFollow(this.player, true, 0.5, 0.5, -200, 120);
         camera.setZoom(1.75, 1.75);
 
-        //this.hud = this.add.container(this.player.x, this.player.y - 50, [this.scoreText, this.staminaText, this.livesText]);
-        //this.hud.setScrollFactor(0);
     }
 
     loadAudio() {
@@ -211,31 +214,19 @@ export class LevelTwo extends Phaser.Scene {
 
     }
 
-    generateMobs() {
-         this.foes = this.add.group('enemy');
-         let object = this.map.getObjectLayer('Enemies');
-
-         for(var obj of object.objects) {
-             if(obj.properties[0].name == 'enemy') {
-                 let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
-                 this.foes.add(foe);
-             }
-         }
-     }
-
     generateWinCon() {
-        this.levelBlock = this.add.group('wall');
-        let object = this.map.getObjectLayer('collect');
+        this.levelEnd = this.add.group('door');
+        let object = this.map.getObjectLayer('Flag');
 
         for(var obj of object.objects) {
                 if(obj.properties[0].name == 'door') {
-                let door = this.physics.add.staticSprite(obj.x, obj.y, 'wall');
-                this.levelBlock.add(door);
+                let door = this.physics.add.staticSprite(obj.x, obj.y, 'door');
+                this.levelEnd.add(door);
                 }
             }
 
-        this.levelBlock.setVisible(false);
-    }
+        this.levelEnd.setVisible(false);
+    } 
 
 
     levelCollisions() {
@@ -298,19 +289,6 @@ export class LevelTwo extends Phaser.Scene {
         this.player.playerReset();
     }
 
-    /* playerHit(foe) {
-        this.playAudio('playerHit');
-        this.player.playerDamaged();
-        this.player.lives -= foe.damage;
-        foe.destroy();
-    }
-
-    destroyFoe(foe) {
-        this.playAudio('enemyHit');
-        this.player.score += foe.points;
-        this.player.bullets.sushiHit();
-        foe.destroy();
-    } */
     resetGame() {
         this.player.destroy();
 

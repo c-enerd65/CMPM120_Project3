@@ -32,6 +32,7 @@ export class Start extends Phaser.Scene {
         this.load.image('gem', 'assets/sprites/gem.png');
         this.load.image('wall', 'assets/sprites/wall.png');
         this.load.image('bullet', 'assets/sprites/sushi.png');
+        this.load.image('platform', 'assets/sprites/platform.png');
         this.load.image('star', 'assets/particles/star_07.png');
         this.load.image('plus', 'assets/particles/plusBS.png');
     }
