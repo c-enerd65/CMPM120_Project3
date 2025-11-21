@@ -194,8 +194,8 @@ export class LevelOne extends Phaser.Scene{
                 max: 150
             },
             scale: {
-                start: 0.06,
-                end: 0.004,
+                start: 1,
+                end: 0.5,
                 random: true
             },
             blendMode: 'ADD',

@@ -73,10 +73,10 @@ export class LevelTwo extends Phaser.Scene {
         this.physics.add.collider(ground, this.player);
         this.physics.add.collider(ground, this.foe);
 
-        // var movingPlatform = this.map.createLayer("Platform", tileset, 0, 0);
-        // movingPlatform.setCollisionBetween(1, this.width);
-        // this.physics.add.collider(movingPlatform, this.player);
-        // this.physics.add.collider(movingPlatform, this.foe);
+        var movingPlatform = this.map.createLayer("Platform", tileset, 0, 0);
+        movingPlatform.setCollisionBetween(1, this.width);
+        this.physics.add.collider(movingPlatform, this.player);
+        this.physics.add.collider(movingPlatform, this.foe);
 
         var spike = this.map.createLayer("Ouch", tileset, 0, 0);
         ground.setCollisionBetween(1, this.width);
@@ -129,8 +129,16 @@ export class LevelTwo extends Phaser.Scene {
 
     loadAudio() {
         this.audioFiles = {
+            laser: this.sound.add('laser'),
             jump: this.sound.add('jump'),
-            theme: this.sound.add('lvl1_theme')
+            theme: this.sound.add('lvl1_theme'),
+            run: this.sound.add('runBoost'),
+            stamina: this.sound.add('staminaBoost'),
+            collect: this.sound.add('collectGem'),
+            collectKey: this.sound.add('collectKey'),
+            playerFall: this.sound.add('playerFall'),
+            playerHit: this.sound.add('playerHit'),
+            enemyHit: this.sound.add('enemyHit')
         };
     }
 
@@ -143,16 +151,16 @@ export class LevelTwo extends Phaser.Scene {
     }
 
     initParticles() {
-        this.runTrail = this.add.particles(this.player.x, this.player.y, 'star_1', {
-            quantity: 100,
-            accelerationX: 1000,
+        this.runTrail = this.add.particles(-8, 8, 'star', {
+            quantity: 1,
+            accelerationX: -250,
             speedY: {
-                min: 20,
+                min: 10,
                 max: 20
             },
             speedX: {
-                min: 30,
-                max: 70
+                min: 10,
+                max: 30
             },
             scale: {
                 start: 0.1,
@@ -160,10 +168,9 @@ export class LevelTwo extends Phaser.Scene {
                 random: true
             },
             blendMode: 'ADD',
-            frequency: -1,
+            frequency: 15,
             follow: this.player,
-            followOffest: {},
-            tint: 0xffadd2 
+            tint: 0xFFFFFF 
         });
     }
 
@@ -185,35 +192,45 @@ export class LevelTwo extends Phaser.Scene {
 
     generateGems() {
         this.gems = this.add.group('gem');
-        let object = this.map.getObjectLayer('Items');
+        let object = this.map.getObjectLayer('Gems');
 
-        // for(var obj of object.objects) {
-        //     if(obj.properties[0].name == 'value') {
-        //         let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
-        //         gem.value = obj.properties[0].value;
-        //         this.gems.add(gem);
-        //     }
-        // }
+        for(var obj of object.objects) {
+             if(obj.properties[0].name == 'value') {
+                 let gem = this.physics.add.staticSprite(obj.x, obj.y, 'gem');
+                 gem.value = obj.properties[0].value;
+                 this.gems.add(gem);
+             }
+        }
 
     }
 
-    // generateMobs() {
-    //     this.foes = this.add.group();
-    //     let object = this.map.getObjectLayer('Items');
+    generateMobs() {
+         this.foes = this.add.group('enemy');
+         let object = this.map.getObjectLayer('Enemies');
 
-    //     for(var obj of object.objects) {
-    //         if(obj.properties[0].name == 'enemy') {
-    //             let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
-    //             this.foes.add(foe);
-    //         }
-    //     }
-    // }
+         for(var obj of object.objects) {
+             if(obj.properties[0].name == 'enemy') {
+                 let foe = new Foe(this, obj.x, obj.y, obj.properties[0].value);
+                 this.foes.add(foe);
+             }
+         }
+     }
 
     levelCollisions() {
         this.physics.add.collider(
             this.availBoost,
             this.player,
             this.playerBoost,
+            () => {
+                return true;
+            },
+            this
+        );
+
+         this.physics.add.overlap(
+            this.gems,
+            this.player,
+            this.collectGem,
             () => {
                 return true;
             },
@@ -246,8 +263,17 @@ export class LevelTwo extends Phaser.Scene {
         boost.destroy();
     }
 
+     collectGem(gem) {
+        this.player.score += gem.value;
+        this.playAudio('collect');
+        gem.destroy();
+    }
+
     playerFall() {
+        this.playAudio('playerFall');
         this.player.playerDamaged();
+        this.player.lives -= 1;
+        this.player.playerReset();
     }
 
     resetGame() {

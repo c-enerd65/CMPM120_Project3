@@ -12,7 +12,7 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 3,
+            "scaleInDock": 1.5,
             "scaleInEditor": 2
         },
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj": {
@@ -104,7 +104,7 @@
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj"
     ],
     "project": "Project 3.1.tiled-project",
-    "property.type": "int",
+    "property.type": "string",
     "recentFiles": [
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map01.tmj",
         "C:/Users/Saira Hamid/Documents/GitHub/CMPM120_Project3/asgn3_group/platformer/assets/map/map02.tmj",

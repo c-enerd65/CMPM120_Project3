@@ -266,7 +266,7 @@
          "imageheight":339,
          "imagewidth":339,
          "margin":0,
-         "name":"monochrome_tilemap",
+         "name":"monochromeTilemap",
          "spacing":0,
          "tilecount":400,
          "tileheight":16,
