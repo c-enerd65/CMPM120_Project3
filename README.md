@@ -7,17 +7,19 @@ Level 2 - Created by Saira Hamid
 ## Scoring
 - Level 1: 
     > Collecting gems earns the player a minimal amount of gems, ranging form 5 - 50 points; defeating enemies awards the player with 100-300 points depending on enemy difficulty. Findind a sceret room awards the player with 250 points
+- Level 2:
+    > Collecting all 7 gems on the map awards the player with 175 points total
 
 ## Mechanics
 - Level 1:
-    > Jump from freestanding platforms to reach the end of the level
-    > Use stamina to scale walls if they are too high to jump
-    > Collect gems and kill enemies on the map to earn points
+    - Jump from freestanding platforms to reach the end of the level
+    - Use stamina to scale walls if they are too high to jump over
+    - Collect gems and kill enemies on the map to earn points
 
 - Level 2:
-    > Collect Max Stamina Boost
-    > Jump on moving platforms
-    > Kill enemies to earn additional points
+    - Jump on moving platforms
+    - Collect gems to earn points and 
+    - Use stamina to scale walls if they are too high to jump over 
 
 
 ### rules:
@@ -26,7 +28,7 @@ Level 2 - Created by Saira Hamid
 - `RIGHT` : Move player right
 - `UP` : Player jump
      > If player is near wall, `UP` allows the player to grab the wall scale if stamina allows.
-     > BUG: Jumping increases stamina by variable amount [ keeping to be nice <3 ]
+        - BUG: Jumping increases stamina by variable amount
 - `SPACE` : Player shoots sushi
 
 - `1` : Used in level 2 to bring player to level 1
@@ -39,33 +41,28 @@ Level 2 - Created by Saira Hamid
 
 #### Level 1 Player Death:
 - Enviornment collisions:
-    > Void death
-    > Spike death
+    - Void death
+    - Spike death
 - Enemy collisions
 - Game ends when player reaches 0 lives 
 
 #### Level 1 Additional Elements:
 - Complex Camera: Camera moves with player with some deadzone
-    > HUD moves with camera
+    - HUD moves with camera
 - Wall grabs: See Keybinds
 - Player Death: See Level 1 Player Death
 - Enemies: Patrolling enemies
-    > Unique damage / movements
-    > Player can shoot enemies to unblock path
+    - Unique damage / movements
+    - Player can shoot enemies to unblock path
 - Juicy Juice: All interactions have a sound effect
 - PowerUps: Player has two boosts they can use in this level
-    > Stamina: Gives the player a slight boost in stamina (20 pts)
-    > Speed: Player speed doubles allowing them to traverse the map quickly
+    - Stamina: Gives the player a slight boost in stamina (20 pts)
+    - Speed: Player speed doubles allowing them to traverse the map quickly
 
 #### Level 2 Win Condition:
-- Player must reach landmark to end game successfully
-
-#### Level 2 Player Death:
-- See Level 1 Player Death
+- Player must collect all of the coin on the map
 
 #### Level 2 Additional Elements:
 - Complex Camera: Camera moves with player with some deadzone
-    > HUD moves with camera
-- Player Death: See Player Death
-- PowerUps: Player has two boosts they can use in this level
-    > Max Stamina: Gives the player a slight boost in stamina
+- PowerUps: Player has two boosts they can use in this level]
+- Moving Platforms
